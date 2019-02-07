@@ -11,6 +11,7 @@ namespace Know_Your_Nation_Speedy.Models
         public int DonationsId { get; set; }
         public string Organization { get; set; }
         public double AmountDonated { get; set; }
+        public string Url { get; set; }
         public DateTime Date { get; set; }
         public Users User { get; set; }
     }

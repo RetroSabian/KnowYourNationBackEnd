@@ -49,6 +49,14 @@ namespace Know_Your_Nation_Speedy.Models
         {
             return _db.UsersEntries.OrderBy(e => e.Name).ToList();
         }
+        public IList<Nations> NationsExecute()
+        {
+            return _db.NationsEntries.OrderBy(e => e.Name).ToList();
+        }
+        public IList<Memberships> MembershipsExecute()
+        {
+            return _db.MembershipsEntries.OrderBy(e => e.Type).ToList();
+        }
     }
 }
 

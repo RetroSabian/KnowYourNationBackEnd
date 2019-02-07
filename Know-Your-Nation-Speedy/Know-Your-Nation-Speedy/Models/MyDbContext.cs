@@ -27,11 +27,11 @@ namespace Know_Your_Nation_Speedy.Models
         public DbSet<Orders> OrdersEntries { get; set; }
         public DbSet<Products> ProductsEntries { get; set; }
         public DbSet<ProductOrders> ProductOrdersEntries { get; set; }
+        public DbSet<Nations> NationsEntries { get; set; }
+        public DbSet<Memberships> MembershipsEntries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AnimationsWatched>()
-                .HasKey(aw => new { aw.UsersId, aw.AnimationsId });
             modelBuilder.Entity<AnimationsWatched>()
                 .HasOne(aw => aw.Animation)
                 .WithMany(a => a.AnimationWatched)
@@ -42,8 +42,6 @@ namespace Know_Your_Nation_Speedy.Models
                 .HasForeignKey(aw => aw.UsersId);
 
             modelBuilder.Entity<ArticlesRead>()
-                .HasKey(ar => new { ar.UsersId, ar.ArticlesId });
-            modelBuilder.Entity<ArticlesRead>()
                 .HasOne(ar => ar.Article)
                 .WithMany(a => a.ArticleRead)
                 .HasForeignKey(ar => ar.ArticlesId);
@@ -51,9 +49,7 @@ namespace Know_Your_Nation_Speedy.Models
                 .HasOne(ar => ar.User)
                 .WithMany(a => a.ArticleRead)
                 .HasForeignKey(ar => ar.UsersId);
-
-            modelBuilder.Entity<BooksRead>()
-                .HasKey(br => new { br.UsersId, br.BooksId });
+            
             modelBuilder.Entity<BooksRead>()
                 .HasOne(br => br.Book)
                 .WithMany(b => b.BookRead)
@@ -62,9 +58,7 @@ namespace Know_Your_Nation_Speedy.Models
                 .HasOne(br => br.User)
                 .WithMany(b => b.BookRead)
                 .HasForeignKey(br => br.UsersId);
-
-            modelBuilder.Entity<ComicsRead>()
-                .HasKey(cr => new { cr.UsersId, cr.ComicsId });
+            
             modelBuilder.Entity<ComicsRead>()
                 .HasOne(cr => cr.Comic)
                 .WithMany(c => c.ComicRead)
@@ -75,8 +69,6 @@ namespace Know_Your_Nation_Speedy.Models
                 .HasForeignKey(cr => cr.UsersId);
 
             modelBuilder.Entity<ProductOrders>()
-                .HasKey(po => new { po.OrdersId, po.ProductsId });
-            modelBuilder.Entity<ProductOrders>()
                 .HasOne(po => po.Product)
                 .WithMany(p => p.ProductOrder)
                 .HasForeignKey(po => po.ProductsId);
@@ -85,8 +77,6 @@ namespace Know_Your_Nation_Speedy.Models
                 .WithMany(o => o.ProductOrder)
                 .HasForeignKey(po => po.OrdersId);
 
-            modelBuilder.Entity<UserEvents>()
-                .HasKey(ue => new { ue.UsersId, ue.EventsId });
             modelBuilder.Entity<UserEvents>()
                 .HasOne(ue => ue.Event)
                 .WithMany(u => u.UserEvent)
@@ -104,7 +94,13 @@ namespace Know_Your_Nation_Speedy.Models
            .HasMany(c => c.Donation)
            .WithOne(e => e.User);
 
+            modelBuilder.Entity<Nations>()
+            .HasMany(a => a.Article)
+            .WithOne(n => n.Nation);
 
+            modelBuilder.Entity<Memberships>()
+            .HasMany(u => u.User)
+            .WithOne(m => m.Membership);
         }
 
     }

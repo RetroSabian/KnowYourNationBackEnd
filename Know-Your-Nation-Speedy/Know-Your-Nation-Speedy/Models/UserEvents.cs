@@ -6,6 +6,7 @@ namespace Know_Your_Nation_Speedy.Models
 {
     public class UserEvents
     {
+        public int UserEventsId { get; set; }
         public int EventsId { get; set; }
         public int UsersId { get; set; }
         public Users User { get; set; }
