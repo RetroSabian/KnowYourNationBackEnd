@@ -27,7 +27,6 @@ namespace Know_Your_Nation_Speedy.Controllers
         {
             return await _db.UsersEntries.ToListAsync();
         }
-        // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEntry([FromRoute] int id)
         {
@@ -39,22 +38,36 @@ namespace Know_Your_Nation_Speedy.Controllers
             await _db.SaveChangesAsync();
             return Ok(entry);
         }
-        // POST api/values
-        [HttpPost]
-        public async Task Post([FromBody] Users value)
+        [HttpGet("login")]
+        public ActionResult<Users> Login(string username, string pass)
         {
-            await _db.UsersEntries.AddAsync(value);
+            var user = _db.UsersEntries.Where(o => o.Email == username).FirstOrDefault();
+            if (user != null)
+            {
+                if (user.Password != pass)
+                {
+                    return BadRequest("The username/password is incorrect");
+                }
+                return Ok(user);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost]
+        public async Task Post([FromBody] Users Body)
+        {
+            await _db.UsersEntries.AddAsync(Body);
             await _db.SaveChangesAsync();
         }
-        // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] Users value)
+        public async Task Put(int id, [FromBody] Users Body)
         {
             var entry = await _db.UsersEntries.FindAsync(id);
-            entry = value;
+            entry = Body;
             await _db.SaveChangesAsync();
         }
-        // DELETE api/values/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntry([FromRoute]int id)
         {
