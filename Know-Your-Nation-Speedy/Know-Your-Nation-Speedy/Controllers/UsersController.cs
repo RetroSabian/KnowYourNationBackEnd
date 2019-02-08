@@ -39,12 +39,12 @@ namespace Know_Your_Nation_Speedy.Controllers
             return Ok(entry);
         }
         [HttpPost("login")]
-        public ActionResult<Users> Login(string username, string pass)
+        public ActionResult<Users> Login([FromBody] Users body)
         {
-            var user = _db.UsersEntries.Where(o => o.Email == username).FirstOrDefault();
+            var user = _db.UsersEntries.Where(o => o.Email == body.Email).FirstOrDefault();
             if (user != null)
             {
-                if (user.Password != pass)
+                if (user.Password != body.Password)
                 {
                     return new JsonResult("{Status: \"Invalid Username or Password\"}");
                 }
