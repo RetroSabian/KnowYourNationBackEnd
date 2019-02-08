@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Know_Your_Nation_Speedy.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20190207131510_InitialCreate")]
+    [Migration("20190207135856_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
