@@ -46,7 +46,7 @@ namespace Know_Your_Nation_Speedy.Controllers
             {
                 if (user.Password != pass)
                 {
-                    return BadRequest("The username/password is incorrect");
+                    return new JsonResult("{Status: \"Invalid Username or Password\"}");
                 }
                 return Ok(user);
             }
