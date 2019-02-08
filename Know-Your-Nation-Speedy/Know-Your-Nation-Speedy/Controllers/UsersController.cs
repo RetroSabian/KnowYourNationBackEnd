@@ -38,7 +38,7 @@ namespace Know_Your_Nation_Speedy.Controllers
             await _db.SaveChangesAsync();
             return Ok(entry);
         }
-        [HttpGet("login")]
+        [HttpPost("login")]
         public ActionResult<Users> Login(string username, string pass)
         {
             var user = _db.UsersEntries.Where(o => o.Email == username).FirstOrDefault();
