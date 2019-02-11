@@ -37,17 +37,17 @@ namespace Know_Your_Nation_Speedy.Controllers
             return Ok(entry);
         }
         [HttpPost("login")]
-        public ActionResult<Users> Login([FromBody] Users Body)
+        public ActionResult<Users> Login([FromBody] Users User)
         {
 
-            var user = _db.UsersEntries.Where(o => o.Email == Body.Email).FirstOrDefault();
-            if (user != null)
+            var ExistingUser = _db.UsersEntries.Where(o => o.Email == User.Email).FirstOrDefault();
+            if (ExistingUser != null)
             {
-                if (user.Password != Body.Password)
+                if (ExistingUser.Password != User.Password)
                 {
                     return new JsonResult("{Status: \"Invalid Username or Password\"}");
                 }
-                return Ok(Body);
+                return Ok(User);
             }
             else
             {
@@ -55,16 +55,16 @@ namespace Know_Your_Nation_Speedy.Controllers
             }
         }
         [HttpPost]
-        public async Task Post([FromBody] Users Body)
+        public async Task Post([FromBody] Users User)
         {
-            await _db.UsersEntries.AddAsync(Body);
+            await _db.UsersEntries.AddAsync(User);
             await _db.SaveChangesAsync();
         }
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] Users Body)
+        public async Task Put(int id, [FromBody] Users User)
         {
             var entry = await _db.UsersEntries.FindAsync(id);
-            entry = Body;
+            entry = User;
             await _db.SaveChangesAsync();
         }
         [HttpDelete("{id}")]
