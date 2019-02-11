@@ -39,7 +39,6 @@ namespace Know_Your_Nation_Speedy.Controllers
         [HttpPost("login")]
         public ActionResult<Users> Login([FromBody] Users User)
         {
-
             var ExistingUser = _db.UsersEntries.Where(o => o.Email == User.Email).FirstOrDefault();
             if (ExistingUser != null)
             {
