@@ -10,6 +10,7 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialise();
         }
+
         public int OrdersId { get; set; }
         public DateTime DateOrdered { get; set; }
         public DateTime DateExpected { get; set; }
@@ -23,6 +24,7 @@ namespace Know_Your_Nation_Speedy.Models
         public string TrackingNumber { get; set; }
         public Users User { get; set; }
         public ICollection<ProductOrders> ProductOrder { get; set; }
+
         public void Initialise()
         {
             ProductOrder = new HashSet<ProductOrders>();

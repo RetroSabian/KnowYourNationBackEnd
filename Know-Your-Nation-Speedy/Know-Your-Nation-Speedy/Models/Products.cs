@@ -11,6 +11,7 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialise();
         }
+
         public int ProductsId { get; set; }
         public string ProductName { get; set; }
         public string ProductCoverImageLocation { get; set; }
@@ -22,6 +23,7 @@ namespace Know_Your_Nation_Speedy.Models
         public int? ProductSizeOption { get; set; }
         public int? ProductColourOption { get; set; }
         public ICollection<ProductOrders> ProductOrder { get; set; }
+
         public void Initialise()
         {
             ProductOrder = new HashSet<ProductOrders>();

@@ -11,6 +11,7 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialise();
         }
+
         public int ArticlesId { get; set; }
         public string ArticleName { get; set; }
         public string ArticleFileLocation { get; set; }
@@ -18,6 +19,7 @@ namespace Know_Your_Nation_Speedy.Models
         public string ArticleDescription { get; set; }
         public Nations Nation { get; set; }
         public ICollection<ArticlesRead> ArticleRead { get; set; }
+
         public void Initialise()
         {
             ArticleRead = new HashSet<ArticlesRead>();

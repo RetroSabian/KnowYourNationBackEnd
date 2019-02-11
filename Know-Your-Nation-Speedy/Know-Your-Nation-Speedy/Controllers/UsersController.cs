@@ -19,12 +19,14 @@ namespace Know_Your_Nation_Speedy.Controllers
             _db = context;
             _config = config;
         }
+
         // GET api/values
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Users>>> Get()
         {
             return await _db.UsersEntries.ToListAsync();
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEntry([FromRoute] int id)
         {
@@ -36,6 +38,7 @@ namespace Know_Your_Nation_Speedy.Controllers
             await _db.SaveChangesAsync();
             return Ok(entry);
         }
+
         [HttpPost("login")]
         public ActionResult<Users> Login([FromBody] Users User)
         {
@@ -53,12 +56,14 @@ namespace Know_Your_Nation_Speedy.Controllers
                 return BadRequest();
             }
         }
+
         [HttpPost]
         public async Task Post([FromBody] Users User)
         {
             await _db.UsersEntries.AddAsync(User);
             await _db.SaveChangesAsync();
         }
+
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] Users User)
         {
@@ -66,6 +71,7 @@ namespace Know_Your_Nation_Speedy.Controllers
             entry = User;
             await _db.SaveChangesAsync();
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntry([FromRoute]int id)
         {
