@@ -12,8 +12,8 @@ namespace Know_Your_Nation_Speedy.Models
             Initialize();
         }
         public int NationsId { get; set; }
-        public string Name { get; set; }
-        public string ShortDescription { get; set; }
+        public string NationName { get; set; }
+        public string NationShortDescription { get; set; }
         public ICollection<Articles> Article { get; set; }
         public void Initialize()
         {

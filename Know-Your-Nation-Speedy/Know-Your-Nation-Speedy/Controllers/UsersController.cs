@@ -1,15 +1,9 @@
 ﻿using Know_Your_Nation_Speedy.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Know_Your_Nation_Speedy.Controllers
@@ -53,26 +47,7 @@ namespace Know_Your_Nation_Speedy.Controllers
                 {
                     return new JsonResult("{Status: \"Invalid Username or Password\"}");
                 }
-                var claims = new[]
-                {
-                     new Claim(JwtRegisteredClaimNames.Sub,user.Email),
-                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
-                };
-
-                var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecuerKey"));
-
-                var token = new JwtSecurityToken(
-                    issuer: "api.ereader.retrotest.ac.za/api/Users/login",
-                    audience: "api.ereader.retrotest.ac.za/api/Users/login",
-                    expires: DateTime.UtcNow,
-                    claims: claims,
-                    signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
-                    );
-                return Ok(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
-                });
+                return Ok(Body);
             }
             else
             {

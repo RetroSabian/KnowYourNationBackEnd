@@ -15,19 +15,19 @@ namespace Know_Your_Nation_Speedy.Models
 
         public IList<Animations> AnimationExecute()
         {
-            return _db.AnimationsEntries.OrderBy(e => e.Name).ToList();
+            return _db.AnimationsEntries.OrderBy(e => e.AnimationName).ToList();
         }
         public IList<Articles> ArticlesExecute()
         {
-            return _db.ArticlesEntries.OrderBy(e => e.Name).ToList();
+            return _db.ArticlesEntries.OrderBy(e => e.ArticleName).ToList();
         }
         public IList<Books> BookExecute()
         {
-            return _db.BooksEntries.OrderBy(e => e.Name).ToList();
+            return _db.BooksEntries.OrderBy(e => e.BookName).ToList();
         }
         public IList<Comics> ComicExecute()
         {
-            return _db.ComicsEntries.OrderBy(e => e.Name).ToList();
+            return _db.ComicsEntries.OrderBy(e => e.ComicName).ToList();
         }
         public IList<Donations> DonationExecute()
         {
@@ -35,7 +35,7 @@ namespace Know_Your_Nation_Speedy.Models
         }
         public IList<Events> EventExecute()
         {
-            return _db.EventsEntries.OrderBy(e => e.ProjectName).ToList();
+            return _db.EventsEntries.OrderBy(e => e.EventName).ToList();
         }
         public IList<Orders> OrderExecute()
         {
@@ -43,7 +43,7 @@ namespace Know_Your_Nation_Speedy.Models
         }
         public IList<Products> ProductExecute()
         {
-            return _db.ProductsEntries.OrderBy(e => e.Name).ToList();
+            return _db.ProductsEntries.OrderBy(e => e.ProductName).ToList();
         }
         public IList<Users> UserExecute()
         {
@@ -51,11 +51,43 @@ namespace Know_Your_Nation_Speedy.Models
         }
         public IList<Nations> NationsExecute()
         {
-            return _db.NationsEntries.OrderBy(e => e.Name).ToList();
+            return _db.NationsEntries.OrderBy(e => e.NationName).ToList();
         }
         public IList<Memberships> MembershipsExecute()
         {
-            return _db.MembershipsEntries.OrderBy(e => e.Type).ToList();
+            return _db.MembershipsEntries.OrderBy(e => e.MembershipType).ToList();
+        }
+        public IList<AnimationsWatched> AnimationsWatchedExcecute()
+        {
+            return _db.AnimationsWatchedEntries.ToList();
+        }
+        public IList<ArticlesRead> ArticlesReadExcecute()
+        {
+            return _db.ArticlesReadEntries.ToList();
+        }
+        public IList<BooksRead> BooksReadsExecute()
+        {
+            return _db.BooksReadEntries.ToList();
+        }
+        public IList<ComicsRead> ComicsReadsExecute()
+        {
+            return _db.ComicsReadEntries.ToList();
+        }
+        public IList<ProductOrders> ProductOrdersExecute()
+        {
+            return _db.ProductOrdersEntries.ToList(); 
+        }
+        public IList<UserEvents> UserEventsExecute()
+        {
+            return _db.UserEventsEntries.ToList();
+        }
+        public IList<SpeedyCharacters> SpeedyCharactersExecute()
+        {
+            return _db.SpeedyCharactersEntries.ToList();
+        }
+        public IList<Organisations> OrganisationsExecute()
+        {
+            return _db.OrganisationsEntries.ToList();
         }
     }
 }

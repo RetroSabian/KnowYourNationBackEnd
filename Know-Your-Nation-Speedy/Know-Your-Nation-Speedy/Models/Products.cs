@@ -12,15 +12,17 @@ namespace Know_Your_Nation_Speedy.Models
             Initialise();
         }
         public int ProductsId { get; set; }
-        public string Name { get; set; }
-        public string CoverImageLocation { get; set; }
-        public string Description { get; set; }
-        public int Rating { get; set; }
-        public double Price { get; set; }
-        public string Type { get; set; }
-        public int QuantityOnHand { get; set; }
+        public string ProductName { get; set; }
+        public string ProductCoverImageLocation { get; set; }
+        public string ProductDescription { get; set; }
+        public int? ProductRating { get; set; }
+        public double ProductPrice { get; set; }
+        public string ProductType { get; set; }
+        public int ProductQuantityOnHand { get; set; }
+        public int? ProductSizeOption { get; set; }
+        public int? ProductColourOption { get; set; }
         public ICollection<ProductOrders> ProductOrder { get; set; }
-         public void Initialise()
+        public void Initialise()
         {
             ProductOrder = new HashSet<ProductOrders>();
         }

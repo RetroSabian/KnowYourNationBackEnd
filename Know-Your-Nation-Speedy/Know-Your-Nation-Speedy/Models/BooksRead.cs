@@ -11,8 +11,9 @@ namespace Know_Your_Nation_Speedy.Models
         public int UsersId { get; set; }
         public Books Book { get; set; }
         public Users User { get; set; }
-        public bool ReadStatus { get; set; }
-        public bool Bookmark { get; set; }
-        public int? Rating { get; set; }
+        public bool BookReadStatus { get; set; }
+        public bool BookBookmark { get; set; }
+        public int? BookRating { get; set; }
+        public bool BookAllocated { get; set; }
     }
 }

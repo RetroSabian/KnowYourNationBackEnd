@@ -37,26 +37,6 @@ namespace Know_Your_Nation_Speedy
             services.AddDbContext<MyDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("connection")));
             services.AddSingleton(Configuration);
-
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.SaveToken = true;
-                options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidAudience = "api.ereader.retrotest.ac.za/api/Users/login",
-                    ValidIssuer = "api.ereader.retrotest.ac.za/api/Users/login",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Group$"))
-                };
-
-            });
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -70,7 +50,6 @@ namespace Know_Your_Nation_Speedy
             {
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseSwagger();
             app.UseCors(x => x
@@ -82,8 +61,6 @@ namespace Know_Your_Nation_Speedy
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Timesheet API V1");
             });
-
-            app.UseAuthentication();
             app.UseMvc();
         }
     }

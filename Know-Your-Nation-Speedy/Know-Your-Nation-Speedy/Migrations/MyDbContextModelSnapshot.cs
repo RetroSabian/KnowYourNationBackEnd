@@ -25,13 +25,13 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CoverImageLocation");
+                    b.Property<string>("AnimationCoverImageLocation");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("AnimationDescription");
 
-                    b.Property<string>("FileLocation");
+                    b.Property<string>("AnimationFileLocation");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("AnimationName");
 
                     b.HasKey("AnimationsId");
 
@@ -44,15 +44,17 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("AnimationAllocated");
+
+                    b.Property<bool>("AnimationBookmark");
+
+                    b.Property<int?>("AnimationRating");
+
+                    b.Property<bool>("AnimationWatchedStatus");
+
                     b.Property<int>("AnimationsId");
 
-                    b.Property<bool>("Bookmark");
-
-                    b.Property<int?>("Rating");
-
                     b.Property<int>("UsersId");
-
-                    b.Property<bool>("WatchedStatus");
 
                     b.HasKey("AnimationsWatchedId");
 
@@ -69,15 +71,13 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CoverImageLocation");
+                    b.Property<string>("ArticleCoverImageLocation");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("ArticleDescription");
 
-                    b.Property<string>("FileLocation");
+                    b.Property<string>("ArticleFileLocation");
 
-                    b.Property<bool>("InRotation");
-
-                    b.Property<string>("Name");
+                    b.Property<string>("ArticleName");
 
                     b.Property<int?>("NationsId");
 
@@ -94,15 +94,15 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("ArticleAllocated");
+
+                    b.Property<bool>("ArticleBookmark");
+
+                    b.Property<int?>("ArticleRating");
+
+                    b.Property<bool>("ArticleReadStatus");
+
                     b.Property<int>("ArticlesId");
-
-                    b.Property<bool>("Bookmark");
-
-                    b.Property<bool>("GivenStatus");
-
-                    b.Property<int?>("Rating");
-
-                    b.Property<bool>("ReadStatus");
 
                     b.Property<int>("UsersId");
 
@@ -121,13 +121,13 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CoverImageLocation");
+                    b.Property<string>("BookCoverImageLocation");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("BookDescription");
 
-                    b.Property<string>("FileLocation");
+                    b.Property<string>("BookFileLocation");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("BookName");
 
                     b.HasKey("BooksId");
 
@@ -140,13 +140,15 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Bookmark");
+                    b.Property<bool>("BookAllocated");
+
+                    b.Property<bool>("BookBookmark");
+
+                    b.Property<int?>("BookRating");
+
+                    b.Property<bool>("BookReadStatus");
 
                     b.Property<int>("BooksId");
-
-                    b.Property<int?>("Rating");
-
-                    b.Property<bool>("ReadStatus");
 
                     b.Property<int>("UsersId");
 
@@ -165,13 +167,13 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CoverImageLocation");
+                    b.Property<string>("ComicCoverImageLocation");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("ComicDescription");
 
-                    b.Property<string>("FileLocation");
+                    b.Property<string>("ComicFileLocation");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("ComicName");
 
                     b.HasKey("ComicsId");
 
@@ -184,13 +186,15 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Bookmark");
+                    b.Property<bool>("ComicAllocated");
+
+                    b.Property<bool>("ComicBookmark");
+
+                    b.Property<int?>("ComicRating");
+
+                    b.Property<bool>("ComicReadStatus");
 
                     b.Property<int>("ComicsId");
-
-                    b.Property<int?>("Rating");
-
-                    b.Property<bool>("ReadStatus");
 
                     b.Property<int>("UsersId");
 
@@ -209,17 +213,21 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("AmountDonated");
+                    b.Property<double>("DonatationAmount");
 
-                    b.Property<DateTime>("Date");
+                    b.Property<DateTime>("DonationDate");
+
+                    b.Property<int?>("OrganisationsId");
 
                     b.Property<string>("Organization");
 
-                    b.Property<string>("Url");
+                    b.Property<string>("OrganizationUrl");
 
                     b.Property<int?>("UsersId");
 
                     b.HasKey("DonationsId");
+
+                    b.HasIndex("OrganisationsId");
 
                     b.HasIndex("UsersId");
 
@@ -232,15 +240,25 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address");
+                    b.Property<string>("EventCity");
 
-                    b.Property<DateTime>("Date");
+                    b.Property<DateTime>("EventDate");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("EventDescription");
 
-                    b.Property<string>("ProjectName");
+                    b.Property<string>("EventName");
+
+                    b.Property<string>("EventPostalCode");
+
+                    b.Property<string>("EventStreet");
+
+                    b.Property<string>("EventSuburb");
+
+                    b.Property<int?>("OrganisationsId");
 
                     b.HasKey("EventsId");
+
+                    b.HasIndex("OrganisationsId");
 
                     b.ToTable("EventsEntries");
                 });
@@ -251,11 +269,11 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Duration");
+                    b.Property<DateTime>("MembershipDuration");
 
-                    b.Property<double>("Price");
+                    b.Property<double>("MembershipPrice");
 
-                    b.Property<string>("Type");
+                    b.Property<string>("MembershipType");
 
                     b.HasKey("MembershipsId");
 
@@ -268,9 +286,9 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("NationName");
 
-                    b.Property<string>("ShortDescription");
+                    b.Property<string>("NationShortDescription");
 
                     b.HasKey("NationsId");
 
@@ -283,9 +301,23 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddressToDeliever");
+                    b.Property<DateTime>("DateExpected");
 
                     b.Property<DateTime>("DateOrdered");
+
+                    b.Property<string>("DeliveryCity");
+
+                    b.Property<string>("DeliveryCountry");
+
+                    b.Property<string>("DeliveryPostalCode");
+
+                    b.Property<string>("DeliveryStreet");
+
+                    b.Property<string>("DeliverySuburb");
+
+                    b.Property<bool>("IsBusiness");
+
+                    b.Property<string>("OrderStatus");
 
                     b.Property<string>("TrackingNumber");
 
@@ -296,6 +328,23 @@ namespace Know_Your_Nation_Speedy.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("OrdersEntries");
+                });
+
+            modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Organisations", b =>
+                {
+                    b.Property<int>("OrganisationsId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("OrganisationDescription");
+
+                    b.Property<string>("OrganisationName");
+
+                    b.Property<string>("OrganisationURL");
+
+                    b.HasKey("OrganisationsId");
+
+                    b.ToTable("OrganisationsEntries");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.ProductOrders", b =>
@@ -325,23 +374,42 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CoverImageLocation");
+                    b.Property<int?>("ProductColourOption");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("ProductCoverImageLocation");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("ProductDescription");
 
-                    b.Property<double>("Price");
+                    b.Property<string>("ProductName");
 
-                    b.Property<int>("QuantityOnHand");
+                    b.Property<double>("ProductPrice");
 
-                    b.Property<int>("Rating");
+                    b.Property<int>("ProductQuantityOnHand");
 
-                    b.Property<string>("Type");
+                    b.Property<int?>("ProductRating");
+
+                    b.Property<int?>("ProductSizeOption");
+
+                    b.Property<string>("ProductType");
 
                     b.HasKey("ProductsId");
 
                     b.ToTable("ProductsEntries");
+                });
+
+            modelBuilder.Entity("Know_Your_Nation_Speedy.Models.SpeedyCharacters", b =>
+                {
+                    b.Property<int>("SpeedyCharactersId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CharacterDescription");
+
+                    b.Property<string>("CharacterName");
+
+                    b.HasKey("SpeedyCharactersId");
+
+                    b.ToTable("SpeedyCharactersEntries");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserEvents", b =>
@@ -360,7 +428,7 @@ namespace Know_Your_Nation_Speedy.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("VolunteerEntries");
+                    b.ToTable("UserEventsEntries");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Users", b =>
@@ -371,6 +439,8 @@ namespace Know_Your_Nation_Speedy.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<DateTime>("MembershipExpiration");
+
                     b.Property<int?>("MembershipsId");
 
                     b.Property<string>("Name");
@@ -380,6 +450,8 @@ namespace Know_Your_Nation_Speedy.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<string>("Surname");
+
+                    b.Property<string>("UserOrganisation");
 
                     b.HasKey("UsersId");
 
@@ -449,9 +521,20 @@ namespace Know_Your_Nation_Speedy.Migrations
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Donations", b =>
                 {
+                    b.HasOne("Know_Your_Nation_Speedy.Models.Organisations", "Organisation")
+                        .WithMany("Donation")
+                        .HasForeignKey("OrganisationsId");
+
                     b.HasOne("Know_Your_Nation_Speedy.Models.Users", "User")
                         .WithMany("Donation")
                         .HasForeignKey("UsersId");
+                });
+
+            modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Events", b =>
+                {
+                    b.HasOne("Know_Your_Nation_Speedy.Models.Organisations", "Organisation")
+                        .WithMany("Event")
+                        .HasForeignKey("OrganisationsId");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Orders", b =>
