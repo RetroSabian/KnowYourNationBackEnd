@@ -10,11 +10,13 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialize();
         }
+
         public int MembershipsId { get; set; }
-        public string Type { get; set; }
-        public DateTime Duration { get; set; }
-        public double Price { get; set; }
+        public string MembershipType { get; set; }
+        public DateTime MembershipDuration { get; set; }
+        public double MembershipPrice { get; set; }
         public ICollection<Users> User { get; set; }
+
         public void Initialize()
         {
             User = new HashSet<Users>();

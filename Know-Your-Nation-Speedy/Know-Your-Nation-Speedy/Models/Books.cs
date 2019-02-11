@@ -11,12 +11,14 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialise();
         }
+
         public int BooksId { get; set; }
-        public string Name { get; set; }
-        public string FileLocation { get; set; }
-        public string CoverImageLocation { get; set; }
-        public string Description { get; set; }
+        public string BookName { get; set; }
+        public string BookFileLocation { get; set; }
+        public string BookCoverImageLocation { get; set; }
+        public string BookDescription { get; set; }
         public ICollection<BooksRead> BookRead { get; set; }
+
         public void Initialise()
         {
             BookRead = new HashSet<BooksRead>();

@@ -11,14 +11,15 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialise();
         }
+
         public int ArticlesId { get; set; }
-        public string Name { get; set; }
-        public string FileLocation { get; set; }
-        public string CoverImageLocation { get; set; }
-        public string Description { get; set; }
-        public bool InRotation { get; set; }
+        public string ArticleName { get; set; }
+        public string ArticleFileLocation { get; set; }
+        public string ArticleCoverImageLocation { get; set; }
+        public string ArticleDescription { get; set; }
         public Nations Nation { get; set; }
         public ICollection<ArticlesRead> ArticleRead { get; set; }
+
         public void Initialise()
         {
             ArticleRead = new HashSet<ArticlesRead>();

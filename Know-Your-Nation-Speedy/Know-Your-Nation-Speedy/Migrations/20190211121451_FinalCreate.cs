@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Know_Your_Nation_Speedy.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class FinalCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,10 +14,10 @@ namespace Know_Your_Nation_Speedy.Migrations
                 {
                     AnimationsId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    FileLocation = table.Column<string>(nullable: true),
-                    CoverImageLocation = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    AnimationName = table.Column<string>(nullable: true),
+                    AnimationFileLocation = table.Column<string>(nullable: true),
+                    AnimationCoverImageLocation = table.Column<string>(nullable: true),
+                    AnimationDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,10 +30,10 @@ namespace Know_Your_Nation_Speedy.Migrations
                 {
                     BooksId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    FileLocation = table.Column<string>(nullable: true),
-                    CoverImageLocation = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    BookName = table.Column<string>(nullable: true),
+                    BookFileLocation = table.Column<string>(nullable: true),
+                    BookCoverImageLocation = table.Column<string>(nullable: true),
+                    BookDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,30 +46,14 @@ namespace Know_Your_Nation_Speedy.Migrations
                 {
                     ComicsId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    FileLocation = table.Column<string>(nullable: true),
-                    CoverImageLocation = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    ComicName = table.Column<string>(nullable: true),
+                    ComicFileLocation = table.Column<string>(nullable: true),
+                    ComicCoverImageLocation = table.Column<string>(nullable: true),
+                    ComicDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ComicsEntries", x => x.ComicsId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EventsEntries",
-                columns: table => new
-                {
-                    EventsId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProjectName = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EventsEntries", x => x.EventsId);
                 });
 
             migrationBuilder.CreateTable(
@@ -78,9 +62,9 @@ namespace Know_Your_Nation_Speedy.Migrations
                 {
                     MembershipsId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Type = table.Column<string>(nullable: true),
-                    Duration = table.Column<DateTime>(nullable: false),
-                    Price = table.Column<double>(nullable: false)
+                    MembershipType = table.Column<string>(nullable: true),
+                    MembershipDuration = table.Column<DateTime>(nullable: false),
+                    MembershipPrice = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,12 +77,27 @@ namespace Know_Your_Nation_Speedy.Migrations
                 {
                     NationsId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    ShortDescription = table.Column<string>(nullable: true)
+                    NationName = table.Column<string>(nullable: true),
+                    NationShortDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_NationsEntries", x => x.NationsId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrganisationsEntries",
+                columns: table => new
+                {
+                    OrganisationsId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OrganisationName = table.Column<string>(nullable: true),
+                    OrganisationDescription = table.Column<string>(nullable: true),
+                    OrganisationURL = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrganisationsEntries", x => x.OrganisationsId);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,17 +106,33 @@ namespace Know_Your_Nation_Speedy.Migrations
                 {
                     ProductsId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    CoverImageLocation = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Rating = table.Column<int>(nullable: false),
-                    Price = table.Column<double>(nullable: false),
-                    Type = table.Column<string>(nullable: true),
-                    QuantityOnHand = table.Column<int>(nullable: false)
+                    ProductName = table.Column<string>(nullable: true),
+                    ProductCoverImageLocation = table.Column<string>(nullable: true),
+                    ProductDescription = table.Column<string>(nullable: true),
+                    ProductRating = table.Column<int>(nullable: true),
+                    ProductPrice = table.Column<double>(nullable: false),
+                    ProductType = table.Column<string>(nullable: true),
+                    ProductQuantityOnHand = table.Column<int>(nullable: false),
+                    ProductSizeOption = table.Column<int>(nullable: true),
+                    ProductColourOption = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductsEntries", x => x.ProductsId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SpeedyCharactersEntries",
+                columns: table => new
+                {
+                    SpeedyCharactersId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CharacterName = table.Column<string>(nullable: true),
+                    CharacterDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpeedyCharactersEntries", x => x.SpeedyCharactersId);
                 });
 
             migrationBuilder.CreateTable(
@@ -131,6 +146,8 @@ namespace Know_Your_Nation_Speedy.Migrations
                     Name = table.Column<string>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
+                    UserOrganisation = table.Column<string>(nullable: true),
+                    MembershipExpiration = table.Column<DateTime>(nullable: false),
                     MembershipsId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -150,11 +167,10 @@ namespace Know_Your_Nation_Speedy.Migrations
                 {
                     ArticlesId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    FileLocation = table.Column<string>(nullable: true),
-                    CoverImageLocation = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    InRotation = table.Column<bool>(nullable: false),
+                    ArticleName = table.Column<string>(nullable: true),
+                    ArticleFileLocation = table.Column<string>(nullable: true),
+                    ArticleCoverImageLocation = table.Column<string>(nullable: true),
+                    ArticleDescription = table.Column<string>(nullable: true),
                     NationsId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -169,6 +185,32 @@ namespace Know_Your_Nation_Speedy.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EventsEntries",
+                columns: table => new
+                {
+                    EventsId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EventName = table.Column<string>(nullable: true),
+                    EventDescription = table.Column<string>(nullable: true),
+                    EventDate = table.Column<DateTime>(nullable: false),
+                    EventStreet = table.Column<string>(nullable: true),
+                    EventSuburb = table.Column<string>(nullable: true),
+                    EventCity = table.Column<string>(nullable: true),
+                    EventPostalCode = table.Column<string>(nullable: true),
+                    OrganisationsId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventsEntries", x => x.EventsId);
+                    table.ForeignKey(
+                        name: "FK_EventsEntries_OrganisationsEntries_OrganisationsId",
+                        column: x => x.OrganisationsId,
+                        principalTable: "OrganisationsEntries",
+                        principalColumn: "OrganisationsId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AnimationsWatchedEntries",
                 columns: table => new
                 {
@@ -176,9 +218,10 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AnimationsId = table.Column<int>(nullable: false),
                     UsersId = table.Column<int>(nullable: false),
-                    WatchedStatus = table.Column<bool>(nullable: false),
-                    Bookmark = table.Column<bool>(nullable: false),
-                    Rating = table.Column<int>(nullable: true)
+                    AnimationWatchedStatus = table.Column<bool>(nullable: false),
+                    AnimationBookmark = table.Column<bool>(nullable: false),
+                    AnimationAllocated = table.Column<bool>(nullable: false),
+                    AnimationRating = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -205,9 +248,10 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BooksId = table.Column<int>(nullable: false),
                     UsersId = table.Column<int>(nullable: false),
-                    ReadStatus = table.Column<bool>(nullable: false),
-                    Bookmark = table.Column<bool>(nullable: false),
-                    Rating = table.Column<int>(nullable: true)
+                    BookReadStatus = table.Column<bool>(nullable: false),
+                    BookBookmark = table.Column<bool>(nullable: false),
+                    BookRating = table.Column<int>(nullable: true),
+                    BookAllocated = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -234,9 +278,10 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ComicsId = table.Column<int>(nullable: false),
                     UsersId = table.Column<int>(nullable: false),
-                    ReadStatus = table.Column<bool>(nullable: false),
-                    Bookmark = table.Column<bool>(nullable: false),
-                    Rating = table.Column<int>(nullable: true)
+                    ComicReadStatus = table.Column<bool>(nullable: false),
+                    ComicBookmark = table.Column<bool>(nullable: false),
+                    ComicRating = table.Column<int>(nullable: true),
+                    ComicAllocated = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -262,14 +307,21 @@ namespace Know_Your_Nation_Speedy.Migrations
                     DonationsId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Organization = table.Column<string>(nullable: true),
-                    AmountDonated = table.Column<double>(nullable: false),
-                    Url = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    UsersId = table.Column<int>(nullable: true)
+                    DonatationAmount = table.Column<double>(nullable: false),
+                    OrganizationUrl = table.Column<string>(nullable: true),
+                    DonationDate = table.Column<DateTime>(nullable: false),
+                    UsersId = table.Column<int>(nullable: true),
+                    OrganisationsId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DonationsEntries", x => x.DonationsId);
+                    table.ForeignKey(
+                        name: "FK_DonationsEntries_OrganisationsEntries_OrganisationsId",
+                        column: x => x.OrganisationsId,
+                        principalTable: "OrganisationsEntries",
+                        principalColumn: "OrganisationsId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_DonationsEntries_UsersEntries_UsersId",
                         column: x => x.UsersId,
@@ -285,8 +337,15 @@ namespace Know_Your_Nation_Speedy.Migrations
                     OrdersId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DateOrdered = table.Column<DateTime>(nullable: false),
+                    DateExpected = table.Column<DateTime>(nullable: false),
+                    DeliveryStreet = table.Column<string>(nullable: true),
+                    DeliverySuburb = table.Column<string>(nullable: true),
+                    DeliveryCity = table.Column<string>(nullable: true),
+                    DeliveryCountry = table.Column<string>(nullable: true),
+                    DeliveryPostalCode = table.Column<string>(nullable: true),
+                    IsBusiness = table.Column<bool>(nullable: false),
+                    OrderStatus = table.Column<string>(nullable: true),
                     TrackingNumber = table.Column<string>(nullable: true),
-                    AddressToDeliever = table.Column<string>(nullable: true),
                     UsersId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -301,32 +360,6 @@ namespace Know_Your_Nation_Speedy.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VolunteerEntries",
-                columns: table => new
-                {
-                    UserEventsId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EventsId = table.Column<int>(nullable: false),
-                    UsersId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_VolunteerEntries", x => x.UserEventsId);
-                    table.ForeignKey(
-                        name: "FK_VolunteerEntries_EventsEntries_EventsId",
-                        column: x => x.EventsId,
-                        principalTable: "EventsEntries",
-                        principalColumn: "EventsId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_VolunteerEntries_UsersEntries_UsersId",
-                        column: x => x.UsersId,
-                        principalTable: "UsersEntries",
-                        principalColumn: "UsersId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ArticlesReadEntries",
                 columns: table => new
                 {
@@ -334,10 +367,10 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ArticlesId = table.Column<int>(nullable: false),
                     UsersId = table.Column<int>(nullable: false),
-                    ReadStatus = table.Column<bool>(nullable: false),
-                    Bookmark = table.Column<bool>(nullable: false),
-                    GivenStatus = table.Column<bool>(nullable: false),
-                    Rating = table.Column<int>(nullable: true)
+                    ArticleReadStatus = table.Column<bool>(nullable: false),
+                    ArticleBookmark = table.Column<bool>(nullable: false),
+                    ArticleAllocated = table.Column<bool>(nullable: false),
+                    ArticleRating = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -350,6 +383,32 @@ namespace Know_Your_Nation_Speedy.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ArticlesReadEntries_UsersEntries_UsersId",
+                        column: x => x.UsersId,
+                        principalTable: "UsersEntries",
+                        principalColumn: "UsersId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserEventsEntries",
+                columns: table => new
+                {
+                    UserEventsId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EventsId = table.Column<int>(nullable: false),
+                    UsersId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserEventsEntries", x => x.UserEventsId);
+                    table.ForeignKey(
+                        name: "FK_UserEventsEntries_EventsEntries_EventsId",
+                        column: x => x.EventsId,
+                        principalTable: "EventsEntries",
+                        principalColumn: "EventsId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserEventsEntries_UsersEntries_UsersId",
                         column: x => x.UsersId,
                         principalTable: "UsersEntries",
                         principalColumn: "UsersId",
@@ -429,9 +488,19 @@ namespace Know_Your_Nation_Speedy.Migrations
                 column: "UsersId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DonationsEntries_OrganisationsId",
+                table: "DonationsEntries",
+                column: "OrganisationsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DonationsEntries_UsersId",
                 table: "DonationsEntries",
                 column: "UsersId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventsEntries_OrganisationsId",
+                table: "EventsEntries",
+                column: "OrganisationsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrdersEntries_UsersId",
@@ -449,19 +518,19 @@ namespace Know_Your_Nation_Speedy.Migrations
                 column: "ProductsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersEntries_MembershipsId",
-                table: "UsersEntries",
-                column: "MembershipsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_VolunteerEntries_EventsId",
-                table: "VolunteerEntries",
+                name: "IX_UserEventsEntries_EventsId",
+                table: "UserEventsEntries",
                 column: "EventsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_VolunteerEntries_UsersId",
-                table: "VolunteerEntries",
+                name: "IX_UserEventsEntries_UsersId",
+                table: "UserEventsEntries",
                 column: "UsersId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersEntries_MembershipsId",
+                table: "UsersEntries",
+                column: "MembershipsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -485,7 +554,10 @@ namespace Know_Your_Nation_Speedy.Migrations
                 name: "ProductOrdersEntries");
 
             migrationBuilder.DropTable(
-                name: "VolunteerEntries");
+                name: "SpeedyCharactersEntries");
+
+            migrationBuilder.DropTable(
+                name: "UserEventsEntries");
 
             migrationBuilder.DropTable(
                 name: "AnimationsEntries");
@@ -513,6 +585,9 @@ namespace Know_Your_Nation_Speedy.Migrations
 
             migrationBuilder.DropTable(
                 name: "UsersEntries");
+
+            migrationBuilder.DropTable(
+                name: "OrganisationsEntries");
 
             migrationBuilder.DropTable(
                 name: "MembershipsEntries");
