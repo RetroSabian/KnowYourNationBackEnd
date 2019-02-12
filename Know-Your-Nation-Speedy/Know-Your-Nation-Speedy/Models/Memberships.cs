@@ -16,10 +16,10 @@ namespace Know_Your_Nation_Speedy.Models
         public DateTime MembershipDuration { get; set; }
         public double MembershipPrice { get; set; }
         public string Description { get; set; }
-        public bool AllowArticles { get; set; }
-        public bool AllowAnimations { get; set; }
-        public bool AllowBooks { get; set; }
-        public bool AllowComics { get; set; }
+        public bool AllowArticles { get; set; } = false;
+        public bool AllowAnimations { get; set; } = false;
+        public bool AllowBooks { get; set; } = false;
+        public bool AllowComics { get; set; } = false;
         public ICollection<Users> User { get; set; }
 
         public void Initialize()

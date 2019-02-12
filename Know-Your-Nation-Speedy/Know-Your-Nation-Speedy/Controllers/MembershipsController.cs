@@ -27,9 +27,9 @@ namespace Know_Your_Nation_Speedy.Controllers
         }
 
         [HttpPost("CreateEditMembership")]
-        public async Task Post([FromBody] Memberships Membership)
+        public async Task Post([FromBody] Memberships membership)
         {
-            await _db.MembershipsEntries.AddAsync(Membership);
+            await _db.MembershipsEntries.AddAsync(membership);
             await _db.SaveChangesAsync();
         }
     }
