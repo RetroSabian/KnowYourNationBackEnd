@@ -72,7 +72,7 @@ namespace Tests
                 new User{ Name="Linda",Email="Linda@gmail.com",Password="4321"},
                 new User{ Name="Buhle",Email="Buhle@gmail.com",Password="4321"}
             };
-            _db.UsersEntries.AddRange(entries);
+            _db.UserEntries.AddRange(entries);
             _db.SaveChanges();
 
         }
