@@ -11,7 +11,6 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialise();
         }
-
         public int Id { get; set; }
         public string Name { get; set;}
         public string Description { get; set; }
@@ -21,11 +20,11 @@ namespace Know_Your_Nation_Speedy.Models
         public string City { get; set; }
         public string PostalCode { get; set; }
         public Organisation Organisation { get; set; }
-        public ICollection<UserEvent> UserEvent { get; set; }
+        public ICollection<UserEvent> UserEvents { get; set; }
 
         public void Initialise()
         {
-            UserEvent = new HashSet<UserEvent>();
+            UserEvents = new HashSet<UserEvent>();
         }
     }
 }

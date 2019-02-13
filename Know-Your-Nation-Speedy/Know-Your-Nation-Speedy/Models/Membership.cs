@@ -10,7 +10,6 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialize();
         }
-
         public int Id { get; set; }
         public string Type { get; set; }
         public int Duration { get; set; }
@@ -20,11 +19,11 @@ namespace Know_Your_Nation_Speedy.Models
         public bool AllowAnimation { get; set; } = false;
         public bool AllowBook { get; set; } = false;
         public bool AllowComic { get; set; } = false;
-        public ICollection<User> User { get; set; }
+        public ICollection<User> Users { get; set; }
 
         public void Initialize()
         {
-            User = new HashSet<User>();
+            Users = new HashSet<User>();
         }
     }
 }

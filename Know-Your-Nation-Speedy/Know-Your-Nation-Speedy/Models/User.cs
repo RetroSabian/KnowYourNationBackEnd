@@ -12,7 +12,6 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialise();
         }
-
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -23,23 +22,23 @@ namespace Know_Your_Nation_Speedy.Models
         public DateTime MembershipExpiration { get; set; }
         public Membership Membership { get; set; }
 
-        public ICollection<UserArticle> UserArticle { get; set; }
-        public ICollection<UserBook> UserBook { get; set; }
-        public ICollection<UserComic> UserComic { get; set; }
-        public ICollection<UserAnimation> UserAnimation { get; set; }
-        public ICollection<Donation> Donation { get; set; }
-        public ICollection<Order> Order { get; set; }
-        public ICollection<UserEvent> UserEvent { get; set; }
+        public ICollection<UserArticle> UserArticles { get; set; }
+        public ICollection<UserBook> UserBooks { get; set; }
+        public ICollection<UserComic> UserComics { get; set; }
+        public ICollection<UserAnimation> UserAnimations { get; set; }
+        public ICollection<Donation> Donations { get; set; }
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<UserEvent> UserEvents { get; set; }
 
         public void Initialise()
         {
-            UserArticle = new HashSet<UserArticle>();
-            UserBook = new HashSet<UserBook>();
-            UserComic = new HashSet<UserComic>();
-            UserAnimation = new HashSet<UserAnimation>();
-            Donation = new HashSet<Donation>();
-            Order = new HashSet<Order>();
-            UserEvent = new HashSet<UserEvent>();
+            UserArticles = new HashSet<UserArticle>();
+            UserBooks = new HashSet<UserBook>();
+            UserComics = new HashSet<UserComic>();
+            UserAnimations = new HashSet<UserAnimation>();
+            Donations = new HashSet<Donation>();
+            Orders = new HashSet<Order>();
+            UserEvents = new HashSet<UserEvent>();
         }
     }
 }

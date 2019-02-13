@@ -36,79 +36,79 @@ namespace Know_Your_Nation_Speedy.Models
         {
             modelBuilder.Entity<UserAnimation>()
                 .HasOne(aw => aw.Animation)
-                .WithMany(a => a.UserAnimation)
+                .WithMany(a => a.UserAnimations)
                 .HasForeignKey(aw => aw.AnimationId);
             modelBuilder.Entity<UserAnimation>()
                 .HasOne(aw => aw.User)
-                .WithMany(a => a.UserAnimation)
+                .WithMany(a => a.UserAnimations)
                 .HasForeignKey(aw => aw.UserId);
 
             modelBuilder.Entity<UserArticle>()
                 .HasOne(ar => ar.Article)
-                .WithMany(a => a.UserArticle)
+                .WithMany(a => a.UserArticles)
                 .HasForeignKey(ar => ar.ArticleId);
             modelBuilder.Entity<UserArticle>()
                 .HasOne(ar => ar.User)
-                .WithMany(a => a.UserArticle)
+                .WithMany(a => a.UserArticles)
                 .HasForeignKey(ar => ar.UserId);
             
             modelBuilder.Entity<UserBook>()
                 .HasOne(br => br.Book)
-                .WithMany(b => b.UserBook)
+                .WithMany(b => b.UserBooks)
                 .HasForeignKey(br => br.BookId);
             modelBuilder.Entity<UserBook>()
                 .HasOne(br => br.User)
-                .WithMany(b => b.UserBook)
+                .WithMany(b => b.UserBooks)
                 .HasForeignKey(br => br.UserId);
             
             modelBuilder.Entity<UserComic>()
                 .HasOne(cr => cr.Comic)
-                .WithMany(c => c.UserComic)
+                .WithMany(c => c.UserComics)
                 .HasForeignKey(cr => cr.ComicId);
             modelBuilder.Entity<UserComic>()
                 .HasOne(cr => cr.User)
-                .WithMany(c => c.UserComic)
+                .WithMany(c => c.UserComics)
                 .HasForeignKey(cr => cr.UserId);
 
             modelBuilder.Entity<ProductOrder>()
                 .HasOne(po => po.Product)
-                .WithMany(p => p.ProductOrder)
+                .WithMany(p => p.ProductOrders)
                 .HasForeignKey(po => po.ProductId);
             modelBuilder.Entity<ProductOrder>()
                 .HasOne(po => po.Order)
-                .WithMany(o => o.ProductOrder)
+                .WithMany(o => o.ProductOrders)
                 .HasForeignKey(po => po.OrderId);
 
             modelBuilder.Entity<UserEvent>()
                 .HasOne(ue => ue.Event)
-                .WithMany(u => u.UserEvent)
+                .WithMany(u => u.UserEvents)
                 .HasForeignKey(ue => ue.EventId);
             modelBuilder.Entity<UserEvent>()
                 .HasOne(ue => ue.User)
-                .WithMany(u => u.UserEvent)
+                .WithMany(u => u.UserEvents)
                 .HasForeignKey(ue => ue.UserId);
 
             modelBuilder.Entity<User>()
-           .HasMany(c => c.Order)
+           .HasMany(c => c.Orders)
            .WithOne(e => e.User);
 
             modelBuilder.Entity<User>()
-           .HasMany(c => c.Donation)
+           .HasMany(c => c.Donations)
            .WithOne(e => e.User);
 
             modelBuilder.Entity<Nation>()
-            .HasMany(a => a.Article)
+            .HasMany(a => a.Articles)
             .WithOne(n => n.Nation);
 
             modelBuilder.Entity<Membership>()
-            .HasMany(u => u.User)
+            .HasMany(u => u.Users)
             .WithOne(m => m.Membership);
 
             modelBuilder.Entity<Organisation>()
-            .HasMany(e => e.Event)
+            .HasMany(e => e.Events)
             .WithOne(o => o.Organisation);
             modelBuilder.Entity<Organisation>()
-            .HasMany(d => d.Donation)
+            .HasMany(d => d.Donations)
             .WithOne(o => o.Organisation);         
         }
     }

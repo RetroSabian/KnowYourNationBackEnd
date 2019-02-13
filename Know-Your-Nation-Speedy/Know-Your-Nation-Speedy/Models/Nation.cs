@@ -11,15 +11,14 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialize();
         }
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public ICollection<Article> Article { get; set; }
+        public ICollection<Article> Articles { get; set; }
 
         public void Initialize()
         {
-            Article = new HashSet<Article>();
+            Articles = new HashSet<Article>();
         }
     }
 }

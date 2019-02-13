@@ -11,17 +11,16 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialise();
         }
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string FileLocation { get; set; }
         public string Location { get; set; }
         public string Description { get; set; }
-        public ICollection<UserAnimation> UserAnimation { get; set; }
+        public ICollection<UserAnimation> UserAnimations { get; set; }
 
         public void Initialise()
         {
-            UserAnimation = new HashSet<UserAnimation>();
+            UserAnimations = new HashSet<UserAnimation>();
         }
     }
 }

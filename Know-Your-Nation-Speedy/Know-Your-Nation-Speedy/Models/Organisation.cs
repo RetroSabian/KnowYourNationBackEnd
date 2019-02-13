@@ -11,18 +11,17 @@ namespace Know_Your_Nation_Speedy.Models
         {
             Initialise();
         }
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string URL { get; set;}
-        public ICollection<Donation> Donation { get; set; }
-        public ICollection<Event> Event { get; set; }
+        public Uri URL { get; set;}
+        public ICollection<Donation> Donations { get; set; }
+        public ICollection<Event> Events { get; set; }
 
         public void Initialise()
         {
-            Donation = new HashSet<Donation>();
-            Event = new HashSet<Event>();
+            Donations = new HashSet<Donation>();
+            Events = new HashSet<Event>();
         }
     }
 }
