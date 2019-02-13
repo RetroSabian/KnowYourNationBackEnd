@@ -4,14 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace Know_Your_Nation_Speedy.Models
 {
-    public class Orders
+    public class Order
     {
-        public Orders()
+        public Order()
         {
             Initialise();
         }
-
-        public int OrdersId { get; set; }
+        public int Id { get; set; }
         public DateTime DateOrdered { get; set; }
         public DateTime DateExpected { get; set; }
         public string DeliveryStreet { get; set; }
@@ -22,12 +21,12 @@ namespace Know_Your_Nation_Speedy.Models
         public bool IsBusiness { get; set; }
         public string OrderStatus { get; set; }
         public string TrackingNumber { get; set; }
-        public Users User { get; set; }
-        public ICollection<ProductOrders> ProductOrder { get; set; }
+        public User User { get; set; }
+        public ICollection<ProductOrder> ProductOrders { get; set; }
 
         public void Initialise()
         {
-            ProductOrder = new HashSet<ProductOrders>();
+            ProductOrders = new HashSet<ProductOrder>();
         }
     }
 }

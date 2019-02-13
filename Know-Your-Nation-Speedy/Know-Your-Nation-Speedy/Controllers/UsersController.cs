@@ -22,15 +22,15 @@ namespace Know_Your_Nation_Speedy.Controllers
 
         // GET api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> Get()
+        public async Task<ActionResult<IEnumerable<User>>> Get()
         {
-            return await _db.UsersEntries.ToListAsync();
+            return await _db.UserEntries.ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEntry([FromRoute] int id)
         {
-            var entry = await _db.UsersEntries.SingleOrDefaultAsync(m => m.UsersId == id);
+            var entry = await _db.UserEntries.SingleOrDefaultAsync(m => m.Id == id);
             if (entry == null)
             {
                 return NotFound();
@@ -40,9 +40,9 @@ namespace Know_Your_Nation_Speedy.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult<Users> Login([FromBody] Users User)
+        public ActionResult<User> Login([FromBody] User User)
         {
-            var ExistingUser = _db.UsersEntries.Where(o => o.Email == User.Email).FirstOrDefault();
+            var ExistingUser = _db.UserEntries.Where(o => o.Email == User.Email).FirstOrDefault();
             if (ExistingUser != null)
             {
                 if (ExistingUser.Password != User.Password)
@@ -58,16 +58,16 @@ namespace Know_Your_Nation_Speedy.Controllers
         }
 
         [HttpPost]
-        public async Task Post([FromBody] Users User)
+        public async Task Post([FromBody] User User)
         {
-            await _db.UsersEntries.AddAsync(User);
+            await _db.UserEntries.AddAsync(User);
             await _db.SaveChangesAsync();
         }
 
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] Users User)
+        public async Task Put(int id, [FromBody] User User)
         {
-            var entry = await _db.UsersEntries.FindAsync(id);
+            var entry = await _db.UserEntries.FindAsync(id);
             entry = User;
             await _db.SaveChangesAsync();
         }
@@ -75,12 +75,12 @@ namespace Know_Your_Nation_Speedy.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntry([FromRoute]int id)
         {
-            var entry = await _db.UsersEntries.SingleOrDefaultAsync(m => m.UsersId == id);
+            var entry = await _db.UserEntries.SingleOrDefaultAsync(m => m.Id == id);
             if (entry == null)
             {
                 return NotFound();
             }
-            _db.UsersEntries.Remove(entry);
+            _db.UserEntries.Remove(entry);
             await _db.SaveChangesAsync();
             return Ok(entry);
         }
