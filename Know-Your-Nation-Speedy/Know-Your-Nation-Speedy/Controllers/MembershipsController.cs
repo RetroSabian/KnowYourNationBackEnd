@@ -32,5 +32,17 @@ namespace Know_Your_Nation_Speedy.Controllers
             await _db.MembershipEntries.AddAsync(membership);
             await _db.SaveChangesAsync();
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEntry([FromRoute]int id)
+        {
+            var entry = await _db.MembershipEntries.SingleOrDefaultAsync(m => m.Id == id);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+            _db.MembershipEntries.Remove(entry);
+            await _db.SaveChangesAsync();
+            return Ok(entry);
+        }
     }
 }
