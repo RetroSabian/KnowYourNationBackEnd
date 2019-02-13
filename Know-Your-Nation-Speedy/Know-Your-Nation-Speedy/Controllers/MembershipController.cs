@@ -26,7 +26,7 @@ namespace Know_Your_Nation_Speedy.Controllers
             return await _db.MembershipEntries.ToListAsync();
         }
 
-        [HttpPost("CreateEditMembership")]
+        [HttpPost("CreateMembership")]
         public async Task Post([FromBody] Membership membership)
         {
             await _db.MembershipEntries.AddAsync(membership);
