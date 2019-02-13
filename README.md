@@ -1,3 +1,7 @@
+The back end to a Progressive webapp designed for the Know Your Nation organization
+To view visit https://api.ereader.retrotest.co.za/swagger/index.html
+
+
 To Manage Migrations:
 if you want to update your database:
 roll back to your old migration
