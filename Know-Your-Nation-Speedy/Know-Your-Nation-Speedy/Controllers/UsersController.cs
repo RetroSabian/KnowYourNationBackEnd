@@ -10,11 +10,11 @@ namespace Know_Your_Nation_Speedy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly MyDbContext _db;
         readonly IConfiguration _config;
-        public UserController(MyDbContext context, IConfiguration config)
+        public UsersController(MyDbContext context, IConfiguration config)
         {
             _db = context;
             _config = config;
