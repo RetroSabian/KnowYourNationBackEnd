@@ -13,81 +13,81 @@ namespace Know_Your_Nation_Speedy.Models
             _db = db;
         }
 
-        public IList<Animations> AnimationExecute()
+        public IList<Animation> AnimationExecute()
         {
-            return _db.AnimationsEntries.OrderBy(e => e.AnimationName).ToList();
+            return _db.AnimationEntries.OrderBy(e => e.Name).ToList();
         }
-        public IList<Articles> ArticlesExecute()
+        public IList<Article> ArticleExecute()
         {
-            return _db.ArticlesEntries.OrderBy(e => e.ArticleName).ToList();
+            return _db.ArticleEntries.OrderBy(e => e.Name).ToList();
         }
-        public IList<Books> BookExecute()
+        public IList<Book> BookExecute()
         {
-            return _db.BooksEntries.OrderBy(e => e.BookName).ToList();
+            return _db.BookEntries.OrderBy(e => e.Name).ToList();
         }
-        public IList<Comics> ComicExecute()
+        public IList<Comic> ComicExecute()
         {
-            return _db.ComicsEntries.OrderBy(e => e.ComicName).ToList();
+            return _db.ComicEntries.OrderBy(e => e.Name).ToList();
         }
-        public IList<Donations> DonationExecute()
+        public IList<Donation> DonationExecute()
         {
-            return _db.DonationsEntries.OrderBy(e => e.Organization).ToList();
+            return _db.DonationEntries.ToList();
         }
-        public IList<Events> EventExecute()
+        public IList<Event> EventExecute()
         {
-            return _db.EventsEntries.OrderBy(e => e.EventName).ToList();
+            return _db.EventEntries.OrderBy(e => e.Name).ToList();
         }
-        public IList<Orders> OrderExecute()
+        public IList<Order> OrderExecute()
         {
-            return _db.OrdersEntries.OrderBy(e => e.TrackingNumber).ToList();
+            return _db.OrderEntries.OrderBy(e => e.TrackingNumber).ToList();
         }
-        public IList<Products> ProductExecute()
+        public IList<Product> ProductExecute()
         {
-            return _db.ProductsEntries.OrderBy(e => e.ProductName).ToList();
+            return _db.ProductEntries.OrderBy(e => e.Name).ToList();
         }
-        public IList<Users> UserExecute()
+        public IList<User> UserExecute()
         {
-            return _db.UsersEntries.OrderBy(e => e.Name).ToList();
+            return _db.UserEntries.OrderBy(e => e.Name).ToList();
         }
-        public IList<Nations> NationsExecute()
+        public IList<Nation> NationExecute()
         {
-            return _db.NationsEntries.OrderBy(e => e.NationName).ToList();
+            return _db.NationEntries.OrderBy(e => e.Name).ToList();
         }
-        public IList<Memberships> MembershipsExecute()
+        public IList<Membership> MembershipExecute()
         {
-            return _db.MembershipsEntries.OrderBy(e => e.MembershipType).ToList();
+            return _db.MembershipEntries.OrderBy(e => e.Type).ToList();
         }
-        public IList<AnimationsWatched> AnimationsWatchedExcecute()
+        public IList<UserAnimation> UserAnimationExcecute()
         {
-            return _db.AnimationsWatchedEntries.ToList();
+            return _db.UserAnimationEntries.ToList();
         }
-        public IList<ArticlesRead> ArticlesReadExcecute()
+        public IList<UserArticle> UserArticleExcecute()
         {
-            return _db.ArticlesReadEntries.ToList();
+            return _db.UserArticleEntries.ToList();
         }
-        public IList<BooksRead> BooksReadsExecute()
+        public IList<UserBook> UserBookExecute()
         {
-            return _db.BooksReadEntries.ToList();
+            return _db.UserBookEntries.ToList();
         }
-        public IList<ComicsRead> ComicsReadsExecute()
+        public IList<UserComic> UserComicExecute()
         {
-            return _db.ComicsReadEntries.ToList();
+            return _db.UserComicEntries.ToList();
         }
-        public IList<ProductOrders> ProductOrdersExecute()
+        public IList<ProductOrder> ProductOrderExecute()
         {
-            return _db.ProductOrdersEntries.ToList(); 
+            return _db.ProductOrderEntries.ToList(); 
         }
-        public IList<UserEvents> UserEventsExecute()
+        public IList<UserEvent> UserEventExecute()
         {
-            return _db.UserEventsEntries.ToList();
+            return _db.UserEventEntries.ToList();
         }
-        public IList<SpeedyCharacters> SpeedyCharactersExecute()
+        public IList<SpeedyCharacter> SpeedyCharacterExecute()
         {
-            return _db.SpeedyCharactersEntries.ToList();
+            return _db.SpeedyCharacterEntries.ToList();
         }
-        public IList<Organisations> OrganisationsExecute()
+        public IList<Organisation> OrganisationExecute()
         {
-            return _db.OrganisationsEntries.ToList();
+            return _db.OrganisationEntries.ToList();
         }
     }
 }

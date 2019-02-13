@@ -12,108 +12,105 @@ namespace Know_Your_Nation_Speedy.Models
             : base(options)
         { }
 
-        public DbSet<Users> UsersEntries { get; set; }
-        public DbSet<Donations> DonationsEntries { get; set; }
-        public DbSet<Events> EventsEntries { get; set; }
-        public DbSet<Books> BooksEntries { get; set; }
-        public DbSet<Comics> ComicsEntries { get; set; }
-        public DbSet<Animations> AnimationsEntries { get; set; }
-        public DbSet<Articles> ArticlesEntries { get; set; }
-        public DbSet<BooksRead> BooksReadEntries { get; set; }
-        public DbSet<ComicsRead> ComicsReadEntries { get; set; }
-        public DbSet<AnimationsWatched> AnimationsWatchedEntries { get; set; }
-        public DbSet<ArticlesRead> ArticlesReadEntries { get; set; }
-        public DbSet<Orders> OrdersEntries { get; set; }
-        public DbSet<Products> ProductsEntries { get; set; }
-        public DbSet<ProductOrders> ProductOrdersEntries { get; set; }
-        public DbSet<Nations> NationsEntries { get; set; }
-        public DbSet<Memberships> MembershipsEntries { get; set; }
-        public DbSet<Organisations> OrganisationsEntries { get; set; }
-        public DbSet<SpeedyCharacters> SpeedyCharactersEntries { get; set; }
-        public DbSet<UserEvents> UserEventsEntries { get; set; }
+        public DbSet<User> UserEntries { get; set; }
+        public DbSet<Donation> DonationEntries { get; set; }
+        public DbSet<Event> EventEntries { get; set; }
+        public DbSet<Book> BookEntries { get; set; }
+        public DbSet<Comic> ComicEntries { get; set; }
+        public DbSet<Animation> AnimationEntries { get; set; }
+        public DbSet<Article> ArticleEntries { get; set; }
+        public DbSet<UserBook> UserBookEntries { get; set; }
+        public DbSet<UserComic> UserComicEntries { get; set; }
+        public DbSet<UserAnimation> UserAnimationEntries { get; set; }
+        public DbSet<UserArticle> UserArticleEntries { get; set; }
+        public DbSet<Order> OrderEntries { get; set; }
+        public DbSet<Product> ProductEntries { get; set; }
+        public DbSet<ProductOrder> ProductOrderEntries { get; set; }
+        public DbSet<Nation> NationEntries { get; set; }
+        public DbSet<Membership> MembershipEntries { get; set; }
+        public DbSet<Organisation> OrganisationEntries { get; set; }
+        public DbSet<SpeedyCharacter> SpeedyCharacterEntries { get; set; }
+        public DbSet<UserEvent> UserEventEntries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AnimationsWatched>()
+            modelBuilder.Entity<UserAnimation>()
                 .HasOne(aw => aw.Animation)
-                .WithMany(a => a.AnimationWatched)
-                .HasForeignKey(aw => aw.AnimationsId);
-            modelBuilder.Entity<AnimationsWatched>()
+                .WithMany(a => a.UserAnimation)
+                .HasForeignKey(aw => aw.AnimationId);
+            modelBuilder.Entity<UserAnimation>()
                 .HasOne(aw => aw.User)
-                .WithMany(a => a.AnimationWatched)
-                .HasForeignKey(aw => aw.UsersId);
+                .WithMany(a => a.UserAnimation)
+                .HasForeignKey(aw => aw.UserId);
 
-            modelBuilder.Entity<ArticlesRead>()
+            modelBuilder.Entity<UserArticle>()
                 .HasOne(ar => ar.Article)
-                .WithMany(a => a.ArticleRead)
-                .HasForeignKey(ar => ar.ArticlesId);
-            modelBuilder.Entity<ArticlesRead>()
+                .WithMany(a => a.UserArticle)
+                .HasForeignKey(ar => ar.ArticleId);
+            modelBuilder.Entity<UserArticle>()
                 .HasOne(ar => ar.User)
-                .WithMany(a => a.ArticleRead)
-                .HasForeignKey(ar => ar.UsersId);
+                .WithMany(a => a.UserArticle)
+                .HasForeignKey(ar => ar.UserId);
             
-            modelBuilder.Entity<BooksRead>()
+            modelBuilder.Entity<UserBook>()
                 .HasOne(br => br.Book)
-                .WithMany(b => b.BookRead)
-                .HasForeignKey(br => br.BooksId);
-            modelBuilder.Entity<BooksRead>()
+                .WithMany(b => b.UserBook)
+                .HasForeignKey(br => br.BookId);
+            modelBuilder.Entity<UserBook>()
                 .HasOne(br => br.User)
-                .WithMany(b => b.BookRead)
-                .HasForeignKey(br => br.UsersId);
+                .WithMany(b => b.UserBook)
+                .HasForeignKey(br => br.UserId);
             
-            modelBuilder.Entity<ComicsRead>()
+            modelBuilder.Entity<UserComic>()
                 .HasOne(cr => cr.Comic)
-                .WithMany(c => c.ComicRead)
-                .HasForeignKey(cr => cr.ComicsId);
-            modelBuilder.Entity<ComicsRead>()
+                .WithMany(c => c.UserComic)
+                .HasForeignKey(cr => cr.ComicId);
+            modelBuilder.Entity<UserComic>()
                 .HasOne(cr => cr.User)
-                .WithMany(c => c.ComicRead)
-                .HasForeignKey(cr => cr.UsersId);
+                .WithMany(c => c.UserComic)
+                .HasForeignKey(cr => cr.UserId);
 
-            modelBuilder.Entity<ProductOrders>()
+            modelBuilder.Entity<ProductOrder>()
                 .HasOne(po => po.Product)
                 .WithMany(p => p.ProductOrder)
-                .HasForeignKey(po => po.ProductsId);
-            modelBuilder.Entity<ProductOrders>()
+                .HasForeignKey(po => po.ProductId);
+            modelBuilder.Entity<ProductOrder>()
                 .HasOne(po => po.Order)
                 .WithMany(o => o.ProductOrder)
-                .HasForeignKey(po => po.OrdersId);
+                .HasForeignKey(po => po.OrderId);
 
-            modelBuilder.Entity<UserEvents>()
+            modelBuilder.Entity<UserEvent>()
                 .HasOne(ue => ue.Event)
                 .WithMany(u => u.UserEvent)
-                .HasForeignKey(ue => ue.EventsId);
-            modelBuilder.Entity<UserEvents>()
+                .HasForeignKey(ue => ue.EventId);
+            modelBuilder.Entity<UserEvent>()
                 .HasOne(ue => ue.User)
                 .WithMany(u => u.UserEvent)
-                .HasForeignKey(ue => ue.UsersId);
+                .HasForeignKey(ue => ue.UserId);
 
-            modelBuilder.Entity<Users>()
+            modelBuilder.Entity<User>()
            .HasMany(c => c.Order)
            .WithOne(e => e.User);
 
-            modelBuilder.Entity<Users>()
+            modelBuilder.Entity<User>()
            .HasMany(c => c.Donation)
            .WithOne(e => e.User);
 
-            modelBuilder.Entity<Nations>()
+            modelBuilder.Entity<Nation>()
             .HasMany(a => a.Article)
             .WithOne(n => n.Nation);
 
-            modelBuilder.Entity<Memberships>()
+            modelBuilder.Entity<Membership>()
             .HasMany(u => u.User)
             .WithOne(m => m.Membership);
 
-            modelBuilder.Entity<Organisations>()
+            modelBuilder.Entity<Organisation>()
             .HasMany(e => e.Event)
             .WithOne(o => o.Organisation);
-            modelBuilder.Entity<Organisations>()
+            modelBuilder.Entity<Organisation>()
             .HasMany(d => d.Donation)
-            .WithOne(o => o.Organisation);
-
-            
+            .WithOne(o => o.Organisation);         
         }
-
     }
 }
 

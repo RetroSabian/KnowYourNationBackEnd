@@ -10,26 +10,26 @@ namespace Know_Your_Nation_Speedy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MembershipsController : ControllerBase
+    public class MembershipController : ControllerBase
     {
         private readonly MyDbContext _db;
         readonly IConfiguration _config;
-        public MembershipsController(MyDbContext context, IConfiguration config)
+        public MembershipController(MyDbContext context, IConfiguration config)
         {
             _db = context;
             _config = config;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Memberships>>> Get()
+        public async Task<ActionResult<IEnumerable<Membership>>> Get()
         {
-            return await _db.MembershipsEntries.ToListAsync();
+            return await _db.MembershipEntries.ToListAsync();
         }
 
         [HttpPost("CreateEditMembership")]
-        public async Task Post([FromBody] Memberships membership)
+        public async Task Post([FromBody] Membership membership)
         {
-            await _db.MembershipsEntries.AddAsync(membership);
+            await _db.MembershipEntries.AddAsync(membership);
             await _db.SaveChangesAsync();
         }
     }

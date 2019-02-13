@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace Know_Your_Nation_Speedy.Models
 {
-    public class Donations
+    public class Donation
     {
-        public int DonationsId { get; set; }
-        public string Organization { get; set; }
+        public int Id { get; set; }
         public double DonatationAmount { get; set; }
-        public string OrganizationUrl { get; set; }
         public DateTime DonationDate { get; set; }
-        public Users User { get; set; }
-        public Organisations Organisation { get; set; }
+        public User User { get; set; }
+        public Organisation Organisation { get; set; }
     }
 }

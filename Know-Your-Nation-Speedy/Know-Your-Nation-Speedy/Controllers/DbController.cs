@@ -26,38 +26,38 @@ namespace Know_Your_Nation_Speedy.Controllers
 
         // GET api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> Get()
+        public async Task<ActionResult<IEnumerable<User>>> Get()
         {
-            return await _db.UsersEntries.ToListAsync();
+            return await _db.UserEntries.ToListAsync();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEntry([FromRoute] int id)
         {
-            var entry = await _db.UsersEntries.SingleOrDefaultAsync(m => m.UsersId == id);
+            var entry = await _db.UserEntries.SingleOrDefaultAsync(m => m.Id == id);
             if (entry == null)
             {
                 return NotFound();
             }
-            _db.UsersEntries.Remove(entry);
+            _db.UserEntries.Remove(entry);
             await _db.SaveChangesAsync();
             return Ok(entry);
         }
 
         // POST api/values
         [HttpPost]
-        public async Task Post([FromBody] Users value)
+        public async Task Post([FromBody] User value)
         {
-            await _db.UsersEntries.AddAsync(value);
+            await _db.UserEntries.AddAsync(value);
             await _db.SaveChangesAsync();
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] Users value)
+        public async Task Put(int id, [FromBody] User value)
         {
-            var entry = await _db.UsersEntries.FindAsync(id);
+            var entry = await _db.UserEntries.FindAsync(id);
             entry = value;
             await _db.SaveChangesAsync();
         }
@@ -67,12 +67,12 @@ namespace Know_Your_Nation_Speedy.Controllers
         public async Task<IActionResult> DeleteEntry([FromRoute]int id)
         {
           
-            var entry = await _db.UsersEntries.SingleOrDefaultAsync(m=> m.UsersId==id);
+            var entry = await _db.UserEntries.SingleOrDefaultAsync(m=> m.Id==id);
             if (entry == null) {
                 return NotFound();
 
             }
-            _db.UsersEntries.Remove(entry);
+            _db.UserEntries.Remove(entry);
             await _db.SaveChangesAsync();
             return Ok(entry);
         }
