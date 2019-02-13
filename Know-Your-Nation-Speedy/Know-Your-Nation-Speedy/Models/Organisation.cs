@@ -14,7 +14,7 @@ namespace Know_Your_Nation_Speedy.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Uri URL { get; set;}
+        public string URL { get; set;}
         public ICollection<Donation> Donations { get; set; }
         public ICollection<Event> Events { get; set; }
 
