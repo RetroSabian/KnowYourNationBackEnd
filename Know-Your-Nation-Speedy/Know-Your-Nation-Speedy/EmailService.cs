@@ -13,9 +13,8 @@ namespace Know_Your_Nation_Speedy.Models{
         string smtpAddress = "smtp.gmail.com";
         int portNumber = 587;
         bool enableSSL = true;
-        string emailFromAddress = "manganyikyle@gmail.com"; //Sender Email Address  
-        string password = "tiyisela97"; //Sender Password 
-
+        string emailFromAddress = "**********"; //Sender Email Address  
+        string password = "***********"; //Sender Password
        
        
         public bool SendMail(string To, string Subject, string Body)
@@ -24,7 +23,7 @@ namespace Know_Your_Nation_Speedy.Models{
             {
                 using (MailMessage mail = new MailMessage())
                 {
-                    MailAssignment(mail, emailFromAddress, To, Subject, "<a href = 'http://localhost:3000/resetPassword'>Reset Password</h1>");
+                    MailAssignment(mail, emailFromAddress, To, Subject, "<a href = 'http://ereader.retrotest.co.za/resetPassword'>Reset Password</h1>");
                     SmtpSend(mail);
                 }
             }

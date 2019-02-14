@@ -13,7 +13,7 @@ namespace Know_Your_Nation_Speedy.Controllers
     public class UsersController : ControllerBase
     {
 
-        private Users _model;
+        private User _model;
         EmailService mailS = new EmailService();
         private MyDbContext _db;
         readonly IConfiguration _config;
@@ -89,13 +89,17 @@ namespace Know_Your_Nation_Speedy.Controllers
 
         [HttpPut()]
         [Route("ForgotPassword/{mail}")]
-        public ActionResult getCodes(string mail)
+        public async Task getCodes(string mail)
         {
             string code = mailS.generateCode();
+            var entry = await _db.UserEntries.FindAsync(mail);
 
-            mailS.SendMail(mail, "testing", code);
-            _db.SaveChanges();
-            return Ok(mail);
+            if (entry != null)
+            {
+                mailS.SendMail(mail, "testing", code);
+                _db.SaveChanges();
+
+            }
         }
 
         // PUT api/values/5
@@ -103,9 +107,9 @@ namespace Know_Your_Nation_Speedy.Controllers
         [Route("ResetPassword/{password} + {mail}")]
         public async Task ResetPassword(string mail,string password)
         {
-            var entry = await _db.UsersEntries.SingleOrDefaultAsync(m => m.Email == mail);
+            var entry = await _db.UserEntries.SingleOrDefaultAsync(m => m.Email == mail);
             entry.Password = password;
-            _db.UsersEntries.Update(entry);
+            _db.UserEntries.Update(entry);
             await _db.SaveChangesAsync();
         }
 
