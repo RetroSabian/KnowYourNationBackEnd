@@ -12,14 +12,16 @@ namespace Know_Your_Nation_Speedy.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly MyDbContext _db;
+
+        private Users _model;
+        EmailService mailS = new EmailService();
+        private MyDbContext _db;
         readonly IConfiguration _config;
         public UsersController(MyDbContext context, IConfiguration config)
         {
             _db = context;
             _config = config;
         }
-
         // GET api/values
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Users>>> Get()
@@ -84,5 +86,29 @@ namespace Know_Your_Nation_Speedy.Controllers
             await _db.SaveChangesAsync();
             return Ok(entry);
         }
+
+        [HttpPut()]
+        [Route("ForgotPassword/{mail}")]
+        public ActionResult getCodes(string mail)
+        {
+            string code = mailS.generateCode();
+
+            mailS.SendMail(mail, "testing", code);
+            _db.SaveChanges();
+            return Ok(mail);
+        }
+
+        // PUT api/values/5
+        [HttpPut()]
+        [Route("ResetPassword/{password} + {mail}")]
+        public async Task ResetPassword(string mail,string password)
+        {
+            var entry = await _db.UsersEntries.SingleOrDefaultAsync(m => m.Email == mail);
+            entry.Password = password;
+            _db.UsersEntries.Update(entry);
+            await _db.SaveChangesAsync();
+        }
+
+
     }
 }
