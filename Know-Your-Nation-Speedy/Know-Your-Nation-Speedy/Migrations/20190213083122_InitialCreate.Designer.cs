@@ -4,14 +4,16 @@ using Know_Your_Nation_Speedy.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Know_Your_Nation_Speedy.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190213083122_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,7 +169,7 @@ namespace Know_Your_Nation_Speedy.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("Duration");
+                    b.Property<DateTime>("Duration");
 
                     b.Property<double>("Price");
 
@@ -469,44 +471,44 @@ namespace Know_Your_Nation_Speedy.Migrations
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Article", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Nation", "Nation")
-                        .WithMany("Articles")
+                        .WithMany("Article")
                         .HasForeignKey("NationId");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Donation", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Organisation", "Organisation")
-                        .WithMany("Donations")
+                        .WithMany("Donation")
                         .HasForeignKey("OrganisationId");
 
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
-                        .WithMany("Donations")
+                        .WithMany("Donation")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Event", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Organisation", "Organisation")
-                        .WithMany("Events")
+                        .WithMany("Event")
                         .HasForeignKey("OrganisationId");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Order", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
-                        .WithMany("Orders")
+                        .WithMany("Order")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.ProductOrder", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Order", "Order")
-                        .WithMany("ProductOrders")
+                        .WithMany("ProductOrder")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Know_Your_Nation_Speedy.Models.Product", "Product")
-                        .WithMany("ProductOrders")
+                        .WithMany("ProductOrder")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -514,19 +516,19 @@ namespace Know_Your_Nation_Speedy.Migrations
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.User", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Membership", "Membership")
-                        .WithMany("Users")
+                        .WithMany("User")
                         .HasForeignKey("MembershipId");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserAnimation", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Animation", "Animation")
-                        .WithMany("UserAnimations")
+                        .WithMany("UserAnimation")
                         .HasForeignKey("AnimationId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
-                        .WithMany("UserAnimations")
+                        .WithMany("UserAnimation")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -534,12 +536,12 @@ namespace Know_Your_Nation_Speedy.Migrations
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserArticle", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Article", "Article")
-                        .WithMany("UserArticles")
+                        .WithMany("UserArticle")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
-                        .WithMany("UserArticles")
+                        .WithMany("UserArticle")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -547,12 +549,12 @@ namespace Know_Your_Nation_Speedy.Migrations
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserBook", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Book", "Book")
-                        .WithMany("UserBooks")
+                        .WithMany("UserBook")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
-                        .WithMany("UserBooks")
+                        .WithMany("UserBook")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -560,12 +562,12 @@ namespace Know_Your_Nation_Speedy.Migrations
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserComic", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Comic", "Comic")
-                        .WithMany("UserComics")
+                        .WithMany("UserComic")
                         .HasForeignKey("ComicId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
-                        .WithMany("UserComics")
+                        .WithMany("UserComic")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -573,12 +575,12 @@ namespace Know_Your_Nation_Speedy.Migrations
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserEvent", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Event", "Event")
-                        .WithMany("UserEvents")
+                        .WithMany("UserEvent")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
-                        .WithMany("UserEvents")
+                        .WithMany("UserEvent")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
