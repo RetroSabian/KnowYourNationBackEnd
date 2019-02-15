@@ -27,7 +27,7 @@ namespace Know_Your_Nation_Speedy.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEntry([FromRoute] int id)
         {
-            var entry = await _db.ProductEntries.SingleOrDefaultAsync(o => o.Id == id);
+            var entry = _db.ProductEntries.Find(id);
             if (entry == null)
             {
                 return NotFound();
