@@ -38,10 +38,18 @@ namespace Know_Your_Nation_Speedy.Controllers
 
 
         [HttpPost]
-        public async Task Post([FromBody] Product product)
+        public ActionResult<Product> Post([FromBody] Product product)
         {
-            await _db.ProductEntries.AddAsync(product);
-            await _db.SaveChangesAsync();
+            if (product.Name == null && product.SizeOption == null && product.Type == null && product.ColourOption == null)
+            {
+                return BadRequest(new { Error = "product not fully loaded" });
+            }
+            else
+            {
+                _db.ProductEntries.AddAsync(product);
+                _db.SaveChangesAsync();
+                return Ok(product);
+            }
         }
 
 
