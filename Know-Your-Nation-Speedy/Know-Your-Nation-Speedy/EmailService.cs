@@ -14,8 +14,7 @@ namespace Know_Your_Nation_Speedy.Models{
         int portNumber = 587;
         bool enableSSL = true;
         string emailFromAddress = "**********"; //Sender Email Address  
-        string password = "***********"; //Sender Password
-       
+        string password = "***********"; //Sender Password   
        
         public bool SendMail(string To, string Subject, string Body)
         {

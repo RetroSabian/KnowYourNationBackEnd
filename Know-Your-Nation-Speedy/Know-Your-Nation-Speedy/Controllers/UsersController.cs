@@ -13,8 +13,7 @@ namespace Know_Your_Nation_Speedy.Controllers
     public class UsersController : ControllerBase
     {
 
-        private User _model;
-        EmailService mailS = new EmailService();
+        EmailService emailService = new EmailService();
         private MyDbContext _db;
         readonly IConfiguration _config;
         public UsersController(MyDbContext context, IConfiguration config)
@@ -91,12 +90,12 @@ namespace Know_Your_Nation_Speedy.Controllers
         [Route("ForgotPassword/{mail}")]
         public async Task getCodes(string mail)
         {
-            string code = mailS.generateCode();
+            string code = emailService.generateCode();
             var entry = await _db.UserEntries.FindAsync(mail);
 
             if (entry != null)
             {
-                mailS.SendMail(mail, "testing", code);
+                emailService.SendMail(mail, "testing", code);
                 _db.SaveChanges();
 
             }
