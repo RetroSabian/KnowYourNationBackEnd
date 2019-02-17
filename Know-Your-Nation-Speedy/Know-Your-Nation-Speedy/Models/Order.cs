@@ -20,7 +20,6 @@ namespace Know_Your_Nation_Speedy.Models
         public string DeliveryPostalCode { get; set; }
         public bool IsBusiness { get; set; }
         public string OrderStatus { get; set; }
-        public string TrackingNumber { get; set; }
         public User User { get; set; }
         public ICollection<ProductOrder> ProductOrders { get; set; }
 

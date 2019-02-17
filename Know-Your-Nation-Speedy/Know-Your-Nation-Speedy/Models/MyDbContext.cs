@@ -12,21 +12,14 @@ namespace Know_Your_Nation_Speedy.Models
             : base(options)
         { }
 
+        public DbSet<Content> ContentEntries { get; set; }
+        public DbSet<UserContent> UserContentEntries { get; set; }
         public DbSet<User> UserEntries { get; set; }
         public DbSet<Donation> DonationEntries { get; set; }
         public DbSet<Event> EventEntries { get; set; }
-        public DbSet<Book> BookEntries { get; set; }
-        public DbSet<Comic> ComicEntries { get; set; }
-        public DbSet<Animation> AnimationEntries { get; set; }
-        public DbSet<Article> ArticleEntries { get; set; }
-        public DbSet<UserBook> UserBookEntries { get; set; }
-        public DbSet<UserComic> UserComicEntries { get; set; }
-        public DbSet<UserAnimation> UserAnimationEntries { get; set; }
-        public DbSet<UserArticle> UserArticleEntries { get; set; }
         public DbSet<Order> OrderEntries { get; set; }
         public DbSet<Product> ProductEntries { get; set; }
         public DbSet<ProductOrder> ProductOrderEntries { get; set; }
-        public DbSet<Nation> NationEntries { get; set; }
         public DbSet<Membership> MembershipEntries { get; set; }
         public DbSet<Organisation> OrganisationEntries { get; set; }
         public DbSet<SpeedyCharacter> SpeedyCharacterEntries { get; set; }
@@ -34,41 +27,14 @@ namespace Know_Your_Nation_Speedy.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserAnimation>()
-                .HasOne(aw => aw.Animation)
-                .WithMany(a => a.UserAnimations)
-                .HasForeignKey(aw => aw.AnimationId);
-            modelBuilder.Entity<UserAnimation>()
+            modelBuilder.Entity<UserContent>()
+                .HasOne(c => c.Content)
+                .WithMany(a => a.UserContent)
+                .HasForeignKey(aw => aw.ContentId);
+            modelBuilder.Entity<UserContent>()
                 .HasOne(aw => aw.User)
-                .WithMany(a => a.UserAnimations)
+                .WithMany(c => c.UserContent)
                 .HasForeignKey(aw => aw.UserId);
-
-            modelBuilder.Entity<UserArticle>()
-                .HasOne(ar => ar.Article)
-                .WithMany(a => a.UserArticles)
-                .HasForeignKey(ar => ar.ArticleId);
-            modelBuilder.Entity<UserArticle>()
-                .HasOne(ar => ar.User)
-                .WithMany(a => a.UserArticles)
-                .HasForeignKey(ar => ar.UserId);
-            
-            modelBuilder.Entity<UserBook>()
-                .HasOne(br => br.Book)
-                .WithMany(b => b.UserBooks)
-                .HasForeignKey(br => br.BookId);
-            modelBuilder.Entity<UserBook>()
-                .HasOne(br => br.User)
-                .WithMany(b => b.UserBooks)
-                .HasForeignKey(br => br.UserId);
-            
-            modelBuilder.Entity<UserComic>()
-                .HasOne(cr => cr.Comic)
-                .WithMany(c => c.UserComics)
-                .HasForeignKey(cr => cr.ComicId);
-            modelBuilder.Entity<UserComic>()
-                .HasOne(cr => cr.User)
-                .WithMany(c => c.UserComics)
-                .HasForeignKey(cr => cr.UserId);
 
             modelBuilder.Entity<ProductOrder>()
                 .HasOne(po => po.Product)
@@ -95,10 +61,6 @@ namespace Know_Your_Nation_Speedy.Models
             modelBuilder.Entity<User>()
            .HasMany(c => c.Donations)
            .WithOne(e => e.User);
-
-            modelBuilder.Entity<Nation>()
-            .HasMany(a => a.Articles)
-            .WithOne(n => n.Nation);
 
             modelBuilder.Entity<Membership>()
             .HasMany(u => u.Users)

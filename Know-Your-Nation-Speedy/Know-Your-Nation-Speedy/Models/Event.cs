@@ -19,6 +19,7 @@ namespace Know_Your_Nation_Speedy.Models
         public string Suburb { get; set; }
         public string City { get; set; }
         public string PostalCode { get; set; }
+        public bool IsAlive { get; set; }
         public Organisation Organisation { get; set; }
         public ICollection<UserEvent> UserEvents { get; set; }
 

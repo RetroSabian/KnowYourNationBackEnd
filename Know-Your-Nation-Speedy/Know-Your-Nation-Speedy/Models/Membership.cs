@@ -19,6 +19,7 @@ namespace Know_Your_Nation_Speedy.Models
         public bool AllowAnimation { get; set; } = false;
         public bool AllowBook { get; set; } = false;
         public bool AllowComic { get; set; } = false;
+        public bool IsAlive { get; set; } = false;
         public ICollection<User> Users { get; set; }
 
         public void Initialize()

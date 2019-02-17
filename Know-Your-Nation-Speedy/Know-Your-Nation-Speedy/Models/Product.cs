@@ -21,6 +21,7 @@ namespace Know_Your_Nation_Speedy.Models
         public int QuantityOnHand { get; set; }
         public int? SizeOption { get; set; }
         public int? ColourOption { get; set; }
+        public bool IsAlive { get; set; }
         public ICollection<ProductOrder> ProductOrders { get; set; }
 
         public void Initialise()

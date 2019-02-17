@@ -13,21 +13,9 @@ namespace Know_Your_Nation_Speedy.Models
             _db = db;
         }
 
-        public IList<Animation> AnimationExecute()
+        public IList<Content> AnimationExecute()
         {
-            return _db.AnimationEntries.OrderBy(e => e.Name).ToList();
-        }
-        public IList<Article> ArticleExecute()
-        {
-            return _db.ArticleEntries.OrderBy(e => e.Name).ToList();
-        }
-        public IList<Book> BookExecute()
-        {
-            return _db.BookEntries.OrderBy(e => e.Name).ToList();
-        }
-        public IList<Comic> ComicExecute()
-        {
-            return _db.ComicEntries.OrderBy(e => e.Name).ToList();
+            return _db.ContentEntries.OrderBy(e => e.Name).ToList();
         }
         public IList<Donation> DonationExecute()
         {
@@ -39,7 +27,7 @@ namespace Know_Your_Nation_Speedy.Models
         }
         public IList<Order> OrderExecute()
         {
-            return _db.OrderEntries.OrderBy(e => e.TrackingNumber).ToList();
+            return _db.OrderEntries.ToList();
         }
         public IList<Product> ProductExecute()
         {
@@ -49,29 +37,13 @@ namespace Know_Your_Nation_Speedy.Models
         {
             return _db.UserEntries.OrderBy(e => e.Name).ToList();
         }
-        public IList<Nation> NationExecute()
-        {
-            return _db.NationEntries.OrderBy(e => e.Name).ToList();
-        }
         public IList<Membership> MembershipExecute()
         {
             return _db.MembershipEntries.OrderBy(e => e.Type).ToList();
         }
-        public IList<UserAnimation> UserAnimationExcecute()
+        public IList<UserContent> UserAnimationExcecute()
         {
-            return _db.UserAnimationEntries.ToList();
-        }
-        public IList<UserArticle> UserArticleExcecute()
-        {
-            return _db.UserArticleEntries.ToList();
-        }
-        public IList<UserBook> UserBookExecute()
-        {
-            return _db.UserBookEntries.ToList();
-        }
-        public IList<UserComic> UserComicExecute()
-        {
-            return _db.UserComicEntries.ToList();
+            return _db.UserContentEntries.ToList();
         }
         public IList<ProductOrder> ProductOrderExecute()
         {
