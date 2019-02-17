@@ -27,7 +27,6 @@ namespace Know_Your_Nation_Speedy.Controllers
         {
             return await _db.UserEntries.ToListAsync();
         }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEntry([FromRoute] int id)
         {
@@ -39,7 +38,6 @@ namespace Know_Your_Nation_Speedy.Controllers
             await _db.SaveChangesAsync();
             return Ok(entry);
         }
-
         [HttpPost("login")]
         public ActionResult<User> Login([FromBody] User User)
         {
@@ -57,14 +55,12 @@ namespace Know_Your_Nation_Speedy.Controllers
                 return BadRequest();
             }
         }
-
         [HttpPost]
         public async Task Post([FromBody] User User)
         {
             await _db.UserEntries.AddAsync(User);
             await _db.SaveChangesAsync();
         }
-
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] User User)
         {
@@ -72,7 +68,6 @@ namespace Know_Your_Nation_Speedy.Controllers
             entry = User;
             await _db.SaveChangesAsync();
         }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntry([FromRoute]int id)
         {
@@ -85,7 +80,6 @@ namespace Know_Your_Nation_Speedy.Controllers
             await _db.SaveChangesAsync();
             return Ok(entry);
         }
-
         [HttpPut()]
         [Route("ForgotPassword/{mail}")]
         public async Task getCodes(string mail)
@@ -96,11 +90,8 @@ namespace Know_Your_Nation_Speedy.Controllers
             if (entry != null)
             {
                 emailService.SendMail(mail, "testing", code);
-                _db.SaveChanges();
-
             }
         }
-
         // PUT api/values/5
         [HttpPut()]
         [Route("ResetPassword/{password} + {mail}")]
@@ -111,7 +102,5 @@ namespace Know_Your_Nation_Speedy.Controllers
             _db.UserEntries.Update(entry);
             await _db.SaveChangesAsync();
         }
-
-
     }
 }
