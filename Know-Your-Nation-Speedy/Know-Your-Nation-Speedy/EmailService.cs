@@ -16,7 +16,7 @@ namespace Know_Your_Nation_Speedy.Models{
         string emailFromAddress = "**********"; //Sender Email Address  
         string password = "***********"; //Sender Password   
        
-        public bool SendMail(string To, string Subject, string Body)
+        public bool SendMail(string To, string Subject)
         {
             try
             {
@@ -49,16 +49,6 @@ namespace Know_Your_Nation_Speedy.Models{
             smtp.Credentials = new NetworkCredential(emailFromAddress, password);
             smtp.EnableSsl = enableSSL;
             smtp.Send(mail);
-        }
-
-        public string generateCode()
-        {
-            
-            const string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            Random rand = new Random();
-
-            string code = new string(Enumerable.Repeat(characters, 10).Select(s => s[rand.Next(s.Length)]).ToArray());
-            return code;
         }
     }
 }
