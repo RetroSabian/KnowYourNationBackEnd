@@ -18,12 +18,20 @@ namespace Know_Your_Nation_Speedy.Controllers
             _db = context;
         }
 
-        [HttpGet]
+        [HttpGet("products")]
         public async Task<ActionResult<IEnumerable<Product>>> Get()
         {
+
+            //var list = _db.ProductEntries.Select(o => o.Name).ToList();
+
+            //return Ok(list);
+
             return await _db.ProductEntries.ToListAsync();
         }
- 
+
+
+
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEntry([FromRoute] int id)
         {
@@ -53,6 +61,8 @@ namespace Know_Your_Nation_Speedy.Controllers
         }
 
 
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntry([FromRoute]int id)
         {
@@ -64,6 +74,23 @@ namespace Know_Your_Nation_Speedy.Controllers
             _db.ProductEntries.Remove(entry);
             await _db.SaveChangesAsync();
             return Ok(entry);
+        }
+
+        [HttpGet("getproduct")]
+        public async Task<ActionResult<IEnumerable<Product>>> Get(int id)
+        {
+            var list = _db.ProductEntries.Where(o => o.Id == id);
+
+            return Ok(list.ToList());
+        }
+
+
+        [HttpGet("Type")]
+        public async Task<ActionResult<IEnumerable<Product>>> Get(string type)
+        {
+            var list = _db.ProductEntries.Where(o => o.Type == type);
+
+            return Ok(list.ToList());
         }
     }
 }
