@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <RootNamespace>Know_Your_Nation_Speedy</RootNamespace>
+    <UserSecretsId>92c192cc-f3e3-4f90-82a1-db20ae832b28</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
