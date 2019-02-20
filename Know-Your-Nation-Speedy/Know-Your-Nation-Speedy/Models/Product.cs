@@ -14,6 +14,7 @@ namespace Know_Your_Nation_Speedy.Models
         public int Id { get; set; }
         public string Size { get; set; }
         public string Colour { get; set; }
+        public int BaseProductId { get; set; }
         public BaseProduct BaseProduct { get; set; }
         public ICollection<ProductOrder> ProductOrders { get; set; }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Know_Your_Nation_Speedy.Models
 {
     public class MyDbContext : DbContext
@@ -77,7 +78,7 @@ namespace Know_Your_Nation_Speedy.Models
             modelBuilder.Entity<BaseProduct>()
             .HasMany(p => p.Products)
             .WithOne(b => b.BaseProduct);
-        }
+         }
     }
 }
 

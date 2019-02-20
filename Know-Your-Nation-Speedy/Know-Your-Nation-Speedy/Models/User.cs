@@ -19,6 +19,7 @@ namespace Know_Your_Nation_Speedy.Models
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
         public string UserOrganisation { get; set; }
+        //public int MembershipId { get; set; } = 11;
         public DateTime MembershipExpiration { get; set; }
         public Membership Membership { get; set; }
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Know_Your_Nation_Speedy.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20190220084946_VariationsToProducts")]
-    partial class VariationsToProducts
+    [Migration("20190220184836_addedForeignKeys")]
+    partial class addedForeignKeys
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,9 +77,9 @@ namespace Know_Your_Nation_Speedy.Migrations
 
                     b.Property<DateTime>("DonationDate");
 
-                    b.Property<int?>("OrganisationId");
+                    b.Property<int>("OrganisationId");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -106,7 +106,7 @@ namespace Know_Your_Nation_Speedy.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("OrganisationId");
+                    b.Property<int>("OrganisationId");
 
                     b.Property<string>("PostalCode");
 
@@ -174,7 +174,7 @@ namespace Know_Your_Nation_Speedy.Migrations
 
                     b.Property<string>("OrderStatus");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -206,7 +206,7 @@ namespace Know_Your_Nation_Speedy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BaseProductId");
+                    b.Property<int>("BaseProductId");
 
                     b.Property<string>("Colour");
 
@@ -334,32 +334,37 @@ namespace Know_Your_Nation_Speedy.Migrations
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Organisation", "Organisation")
                         .WithMany("Donations")
-                        .HasForeignKey("OrganisationId");
+                        .HasForeignKey("OrganisationId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
                         .WithMany("Donations")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Event", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Organisation", "Organisation")
                         .WithMany("Events")
-                        .HasForeignKey("OrganisationId");
+                        .HasForeignKey("OrganisationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Order", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Product", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.BaseProduct", "BaseProduct")
                         .WithMany("Products")
-                        .HasForeignKey("BaseProductId");
+                        .HasForeignKey("BaseProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.ProductOrder", b =>
