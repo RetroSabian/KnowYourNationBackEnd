@@ -31,7 +31,7 @@ namespace Know_Your_Nation_Speedy.Models
         }
         public IList<Product> ProductExecute()
         {
-            return _db.ProductEntries.OrderBy(e => e.Name).ToList();
+            return _db.ProductEntries.ToList();
         }
         public IList<User> UserExecute()
         {

@@ -24,6 +24,7 @@ namespace Know_Your_Nation_Speedy.Models
         public DbSet<Organisation> OrganisationEntries { get; set; }
         public DbSet<SpeedyCharacter> SpeedyCharacterEntries { get; set; }
         public DbSet<UserEvent> UserEventEntries { get; set; }
+        public DbSet<BaseProduct> BaseProductEntries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -71,7 +72,11 @@ namespace Know_Your_Nation_Speedy.Models
             .WithOne(o => o.Organisation);
             modelBuilder.Entity<Organisation>()
             .HasMany(d => d.Donations)
-            .WithOne(o => o.Organisation);         
+            .WithOne(o => o.Organisation);
+
+            modelBuilder.Entity<BaseProduct>()
+            .HasMany(p => p.Products)
+            .WithOne(b => b.BaseProduct);
         }
     }
 }

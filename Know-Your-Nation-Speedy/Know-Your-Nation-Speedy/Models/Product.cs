@@ -12,16 +12,9 @@ namespace Know_Your_Nation_Speedy.Models
             Initialise();
         }
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string CoverImageLocation { get; set; }
-        public string Description { get; set; }
-        public int? Rating { get; set; }
-        public double Price { get; set; }
-        public string Type { get; set; }
-        public int QuantityOnHand { get; set; }
-        public int? SizeOption { get; set; }
-        public int? ColourOption { get; set; }
-        public bool IsAlive { get; set; }
+        public string Size { get; set; }
+        public string Colour { get; set; }
+        public BaseProduct BaseProduct { get; set; }
         public ICollection<ProductOrder> ProductOrders { get; set; }
 
         public void Initialise()

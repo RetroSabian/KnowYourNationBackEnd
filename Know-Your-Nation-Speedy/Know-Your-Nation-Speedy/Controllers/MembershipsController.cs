@@ -23,7 +23,15 @@ namespace Know_Your_Nation_Speedy.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Membership>>> Get()
         {
-            return await _db.MembershipEntries.ToListAsync();
+            List<Membership> entry = await _db.MembershipEntries.ToListAsync();
+            if (entry != null)
+            {
+                return Ok(entry);
+            }
+            else
+            {
+                return NotFound(new { error = "Memberships are empty" });
+            }
         }
 
         [HttpPost("CreateMembership")]
@@ -38,18 +46,26 @@ namespace Know_Your_Nation_Speedy.Controllers
             }
             else
             {
-                return NotFound(new { error = "Error: Membership not found" });
+                return NotFound(new { error = "Error: Membership not Created" });
             }
 
         }
         [HttpPost("EditMembership")]
-        public async Task<IActionResult> EditMembership(int id, [FromBody] Membership membership)
+        public async Task<IActionResult> EditMembership( [FromBody] Membership membership)
         {
-            var entry = await _db.MembershipEntries.FindAsync(id);
+            var entry = await _db.MembershipEntries.FindAsync(membership.Id);
             if (entry != null)
             {
-                entry = membership;
-                _db.MembershipEntries.Update(entry);
+                entry.Type = membership.Type;
+                entry.Duration = membership.Duration;
+                entry.Price = membership.Price;
+                entry.Description = membership.Description;
+                entry.AllowAnimation = membership.AllowAnimation;
+                entry.AllowArticle = membership.AllowArticle;
+                entry.AllowBook = membership.AllowBook;
+                entry.AllowComic = membership.AllowComic;
+                entry.IsAlive = membership.IsAlive;
+                 _db.MembershipEntries.Update(entry);
                 await _db.SaveChangesAsync();
                 return Ok();
             }
