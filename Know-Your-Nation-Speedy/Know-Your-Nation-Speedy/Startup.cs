@@ -35,7 +35,7 @@ namespace Know_Your_Nation_Speedy
                 c.SwaggerDoc("v1", new Info { Title = "My DB API", Version = "v1" });
             });
             services.AddDbContext<MyDbContext>
-                (options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+                (options => options.UseSqlServer(Configuration.GetConnectionString("connection")));
             services.AddSingleton(Configuration);
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
