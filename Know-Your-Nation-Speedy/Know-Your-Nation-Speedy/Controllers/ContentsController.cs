@@ -29,7 +29,7 @@ namespace Know_Your_Nation_Speedy.Controllers
                    p.FileLocation,
                    p.Description,
                    p.ImageLocation,
-                   userInfo = p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault(),
+                   Rating = p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault().Rating
                })
                 .ToListAsync();
             if (entry != null)
