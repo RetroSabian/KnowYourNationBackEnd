@@ -20,10 +20,18 @@ namespace Know_Your_Nation_Speedy.Controllers
             _config = config;
         }
 
-        [HttpGet("GetBooks")]
-        public async Task<ActionResult<IEnumerable<Content>>> GetBook()
+        [HttpPost("GetBooks")]
+        public async Task<ActionResult<IEnumerable<temp>>> GetBook([FromBody] UserContent userContent)
         {
-            List<Content> entry = await _db.ContentEntries.Where(o => o.Category == "Book").ToListAsync();
+            var entry = await _db.ContentEntries.Include(o => o.UserContent).Where(o => o.Category == "Book")
+               .Select(p => new {
+                   p.Name,
+                   p.FileLocation,
+                   p.Description,
+                   p.ImageLocation,
+                   userInfo = p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault(),
+               })
+                .ToListAsync();
             if (entry != null)
             {
                 return Ok(entry);
