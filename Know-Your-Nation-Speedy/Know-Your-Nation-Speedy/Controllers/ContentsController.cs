@@ -25,6 +25,7 @@ namespace Know_Your_Nation_Speedy.Controllers
         {
             var entry = await _db.ContentEntries.Include(o => o.UserContent).Where(o => o.Category == "Book")
                .Select(p => new {
+                   p.Id,
                    p.Name,
                    p.FileLocation,
                    p.Description,
