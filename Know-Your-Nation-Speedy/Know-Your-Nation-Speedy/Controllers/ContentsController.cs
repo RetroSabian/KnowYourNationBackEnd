@@ -29,9 +29,13 @@ namespace Know_Your_Nation_Speedy.Controllers
                      .Select(p => new ContentDetailed
                      {
                          Name = p.Name,
-                            FileLocation = p.FileLocation,
-                            Description= p.Description,
-                            ImageLocation= p.ImageLocation
+                         FileLocation = p.FileLocation,
+                         Description = p.Description,
+                         ImageLocation = p.ImageLocation,
+                         Rating = p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault().Rating,
+                         Bookmark = p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault().Bookmark,
+                         Allocated = p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault().Allocated,
+                         ReadStatus = p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault().ReadStatus
                      })
                     .ToListAsync();
             if (entry != null)
