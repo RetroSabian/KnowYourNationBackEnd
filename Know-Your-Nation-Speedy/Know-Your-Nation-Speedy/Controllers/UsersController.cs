@@ -1,4 +1,5 @@
 ﻿using Know_Your_Nation_Speedy.Models;
+using Know_Your_Nation_Speedy.Logic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,16 +32,19 @@ namespace Know_Your_Nation_Speedy.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetEntry([FromRoute] int id)
+        public ActionResult<User> GetEntry([FromRoute] int id)
         {
-            var entry = await _db.UserEntries.SingleOrDefaultAsync(m => m.Id == id);
+            var entry = _db.UserEntries.Where(o => o.Id == id);
+
             if (entry == null)
             {
                 return NotFound();
             }
-            await _db.SaveChangesAsync();
+            _db.SaveChangesAsync();
             return Ok(entry);
         }
+
+
 
         /// POST : 
         [HttpPost("login")]
@@ -48,14 +52,14 @@ namespace Know_Your_Nation_Speedy.Controllers
         {
             var ExistingUser = _db.UserEntries.FirstOrDefault(o => o.Email == User.Email);
             PasswordBasedKeyDerivationFunction obj = new PasswordBasedKeyDerivationFunction();
-            if (ExistingUser != null)
+            if (ExistingUser != null && User.Email.Length != 0)
             {
                 string Pass = obj.Decrypt(ExistingUser.Password);
                 if (Pass != User.Password)
                 {
                     return BadRequest(new { message = "Username or password is incorrect" });
                 }
-                return Ok();
+                return Ok(ExistingUser);
             }
             else
             {
@@ -70,64 +74,79 @@ namespace Know_Your_Nation_Speedy.Controllers
         {
             User.MembershipId = 11;
             PasswordBasedKeyDerivationFunction obj = new PasswordBasedKeyDerivationFunction();
+            var hasNumber = new Regex(@"[0-9]+");
+            var hasUpperChar = new Regex(@"[A-Z]+");
+            var hasLowerChar = new Regex(@"[a-z]+");
+            var hasSpecialChar = new Regex(@"[a-zA-Z0-9 ]*$");
+            var hasMinimum8Chars = new Regex(@".{8,}");
+
             var ExistingUser = _db.UserEntries.FirstOrDefault(o => o.Email == User.Email);
-            if (User.Name == null || User.Password == null || User.Surname == null)
+            if (User.Name == null || User.Password == null || User.Surname == null | !hasLowerChar.IsMatch(User.Password) | !hasUpperChar.IsMatch(User.Password) | !hasNumber.IsMatch(User.Password) | !hasSpecialChar.IsMatch(User.Password) | !hasMinimum8Chars.IsMatch(User.Password))
             {
-                return BadRequest();
+                return BadRequest(new { message = "Password must have atleast 8 characters, 1 lower case , 1 upper case , 1 number & 1 special letter " });
             }
             else
-            {
-                /* I will come back to attend this code for testing for now I am pushing for my team to access my work**/
-                //var hasNumber = new Regex(@"[0-9]+");
-                //var hasUpperChar = new Regex(@"[A-Z]+");
-                //var hasLowerChar = new Regex(@"[a-z]+");
-                //var hasSpecialChar = new Regex(@"[!@#$%^&*()]+_-`~");
-                //var hasMinimum8Chars = new Regex(@".{8,}");
+            { //TO-DO
+              /* I will come back to attend this code for testing for now I am pushing for my team to access my work**/
+
                 string Error = " ";
-                //bool isValidated = hasLowerChar.IsMatch(User.Password)&& hasSpecialChar.IsMatch(User.Password) && hasNumber.IsMatch(User.Password) && hasUpperChar.IsMatch(User.Password) && hasMinimum8Chars.IsMatch(User.Password);
-                var isPassGood = Regex.IsMatch(User.Password, @"(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$");
-                if (ExistingUser == null && isPassGood)
+
+                if (ExistingUser == null)
                 {
 
                     User.Password = obj.encrypt(User.Password);
                     _db.UserEntries.Add(User);
                     _db.SaveChanges();
-                    return Ok(new { message = "Successfully registered .." });
+                    var getUser = _db.UserEntries.FirstOrDefault(o => o.Email == User.Email);
+                    var getUserId = getUser.Id;
+
+                    return Ok(new { getUser.Id, getUser.Name, getUser.Surname });
                 }
                 else
                 {
-                    if (!(isPassGood))
-                    {
-                        Error += "Password must atlest have 1 special case, 1 capital case, 1 lower case and be of 8 length atleast";
-
-                    }
-                    else if (ExistingUser == null)
+                    if (ExistingUser.Email != null)
                     {
 
                         Error += "\n The email already exist, please try to sign up with a new email. ";
                     }
-                    else
-                    {
 
-                    }
                     return BadRequest(new { message = Error });
                 }
             }
         }
 
+        [HttpPost("update")]
+        public async Task update([FromBody] User User)
+        {
+            PasswordBasedKeyDerivationFunction obj = new PasswordBasedKeyDerivationFunction();
+            var entry = await _db.UserEntries.FindAsync(User.Id);
+            if (entry == null)
+            {
+
+            }
+            entry.Email = User.Email;
+            entry.Name = User.Name;
+            entry.PhoneNumber = User.PhoneNumber;
+            entry.Surname = User.Surname;
+            entry.MembershipExpiration = User.MembershipExpiration;
+            entry.Password = obj.Decrypt(User.Password);
+            _db.UserEntries.Update(entry);
+            await _db.SaveChangesAsync();
+        }
+
         [HttpPost]
         public async Task Post([FromBody] User User)
         {
-            var ExistingUser = _db.UserEntries.FirstOrDefault(o => o.Email == User.Email);   
-            if (ExistingUser == null )
+            var ExistingUser = _db.UserEntries.FirstOrDefault(o => o.Email == User.Email);
+            if (ExistingUser == null)
             {
                 await _db.UserEntries.AddAsync(User);
-               await _db.SaveChangesAsync();
-               // return Ok(new { message = "Successfully registered .." });
+                await _db.SaveChangesAsync();
+                // return Ok(new { message = "Successfully registered .." });
             }
             else
             {
-               // return BadRequest(new { message = " registered failed" });
+                // return BadRequest(new { message = " registered failed" });
             }
 
         }
@@ -151,6 +170,28 @@ namespace Know_Your_Nation_Speedy.Controllers
             _db.UserEntries.Remove(entry);
             await _db.SaveChangesAsync();
             return Ok(entry);
+        }
+
+        [HttpPut()]
+        [Route("ForgotPassword/{mail}")]
+        public async Task getCodes(string mail)
+        {
+            var entry = await _db.UserEntries.FindAsync(mail);
+            EmailService Es = new EmailService();
+            if (entry != null)
+            {
+                Es.SendMail(mail, "testing");
+            }
+        }
+        // PUT api/values/5
+        [HttpPut()]
+        [Route("ResetPassword/{password} + {mail}")]
+        public async Task ResetPassword(string mail, string password)
+        {
+            var entry = await _db.UserEntries.SingleOrDefaultAsync(m => m.Email == mail);
+            entry.Password = password;
+            _db.UserEntries.Update(entry);
+            await _db.SaveChangesAsync();
         }
     }
 }

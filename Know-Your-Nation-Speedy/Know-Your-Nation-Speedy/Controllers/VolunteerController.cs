@@ -46,10 +46,10 @@ namespace Know_Your_Nation_Speedy.Controllers
             try
             {
                 var datenow = DateTime.Now;
-                var events = _db.EventEntries.ToArray().Select(o => new { o.Id,o.Date, o.Name }).Where(d => DateTime.Compare(datenow, d.Date) < 0).ToArray() ;
+                var events = _db.EventEntries.ToArray().Select(o => new { o.Id, o.Date, o.Name }).Where(d => DateTime.Compare(datenow, d.Date) < 0).ToArray();
                 if (events != null)
-                {                   
-                        return Ok(events);                 
+                {
+                    return Ok(events);
                 }
                 return null;
             }
@@ -123,15 +123,15 @@ namespace Know_Your_Nation_Speedy.Controllers
         {
             try
             {
-                if(id ==null)
+                if (id == null)
                 {
                     return null;
                 }
-                var events = _db.EventEntries.Where(i=> i.Id==id).FirstOrDefault();
+                var events = _db.EventEntries.Where(i => i.Id == id).FirstOrDefault();
                 if (events != null)
                 {
                     return Ok(events);
-                }   
+                }
                 return null;
             }
             catch (Exception ex)
@@ -139,11 +139,11 @@ namespace Know_Your_Nation_Speedy.Controllers
                 return BadRequest(ex.Message);
             }
         }
-  
+
         [HttpPost("postevent")]
         public ActionResult<Event> Post([FromBody] Event events)
         {
-            if (events.Name == null && events.Description == null && events.City == null && events.Street == null && events.PostalCode ==null && events.Suburb == null)
+            if (events.Name == null && events.Description == null && events.City == null && events.Street == null && events.PostalCode == null && events.Suburb == null)
             {
                 return BadRequest(new { Error = "Event not fully loaded" });
             }
@@ -153,6 +153,6 @@ namespace Know_Your_Nation_Speedy.Controllers
                 _db.SaveChangesAsync();
                 return Ok(events);
             }
-        } 
+        }
     }
 }
