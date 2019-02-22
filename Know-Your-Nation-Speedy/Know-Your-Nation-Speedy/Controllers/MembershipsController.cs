@@ -48,31 +48,27 @@ namespace Know_Your_Nation_Speedy.Controllers
             {
                 return NotFound(new { error = "Error: Membership not Created" });
             }
-
         }
         [HttpPost("EditMembership")]
         public async Task<IActionResult> EditMembership( [FromBody] Membership membership)
         {
             var entry = await _db.MembershipEntries.FindAsync(membership.Id);
-            if (entry != null)
-            {
-                entry.Type = membership.Type;
-                entry.Duration = membership.Duration;
-                entry.Price = membership.Price;
-                entry.Description = membership.Description;
-                entry.AllowAnimation = membership.AllowAnimation;
-                entry.AllowArticle = membership.AllowArticle;
-                entry.AllowBook = membership.AllowBook;
-                entry.AllowComic = membership.AllowComic;
-                entry.IsAlive = membership.IsAlive;
-                 _db.MembershipEntries.Update(entry);
-                await _db.SaveChangesAsync();
-                return Ok();
-            }
-            else
+            if (entry == null)
             {
                 return NotFound(new { error = "Error: Membership not found" });
             }
+            entry.Type = membership.Type;
+            entry.Duration = membership.Duration;
+            entry.Price = membership.Price;
+            entry.Description = membership.Description;
+            entry.AllowAnimation = membership.AllowAnimation;
+            entry.AllowArticle = membership.AllowArticle;
+            entry.AllowBook = membership.AllowBook;
+            entry.AllowComic = membership.AllowComic;
+            entry.IsAlive = membership.IsAlive;
+            _db.MembershipEntries.Update(entry);
+            await _db.SaveChangesAsync();
+            return Ok();
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntry([FromRoute]int id)

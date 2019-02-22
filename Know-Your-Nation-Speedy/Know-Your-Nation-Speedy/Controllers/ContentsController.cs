@@ -21,18 +21,19 @@ namespace Know_Your_Nation_Speedy.Controllers
         }
 
         [HttpPost("GetBooks")]
-        public async Task<ActionResult<IEnumerable<temp>>> GetBook([FromBody] UserContent userContent)
+        public async Task<ActionResult<IEnumerable<ContentDetailed>>> GetBook([FromBody] UserContent userContent)
         {
-            var entry = await _db.ContentEntries.Include(o => o.UserContent).Where(o => o.Category == "Book")
-               .Select(p => new {
-                   p.Id,
-                   p.Name,
-                   p.FileLocation,
-                   p.Description,
-                   p.ImageLocation,
-                   userInfo = p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault(),
-               })
-                .ToListAsync();
+            var entry = await _db.ContentEntries
+                     .Include(o => o.UserContent)
+                     .Where(o => o.Category == "Book")
+                     .Select(p => new ContentDetailed
+                     {
+                         Name = p.Name,
+                            FileLocation = p.FileLocation,
+                            Description= p.Description,
+                            ImageLocation= p.ImageLocation
+                     })
+                    .ToListAsync();
             if (entry != null)
             {
                 return Ok(entry);
@@ -71,7 +72,7 @@ namespace Know_Your_Nation_Speedy.Controllers
                 entry.Description = content.Description;
                 entry.Category = content.Category;
                 entry.Association = content.Association;
-                 _db.ContentEntries.Update(entry);
+                _db.ContentEntries.Update(entry);
                 await _db.SaveChangesAsync();
                 return Ok();
             }
