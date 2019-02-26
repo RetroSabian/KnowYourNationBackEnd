@@ -15,9 +15,7 @@ namespace Know_Your_Nation_Speedy.Models
         public string Description { get; set; }
         public string Category { get; set; }
         public string Association { get; set; }
-        public bool ReadStatus { get; set; } = false;
         public bool Bookmark { get; set; } = false;
         public int? Rating { get; set; }
-        public bool Allocated { get; set; } = false;
     }
 }

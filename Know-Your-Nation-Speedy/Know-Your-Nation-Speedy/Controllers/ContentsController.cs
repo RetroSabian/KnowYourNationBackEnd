@@ -1,4 +1,5 @@
 ﻿using Know_Your_Nation_Speedy.Models;
+using Know_Your_Nation_Speedy.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,14 +21,14 @@ namespace Know_Your_Nation_Speedy.Controllers
             _config = config;
         }
 
-        [HttpPost("GetBooks")]
-        public async Task<ActionResult<IEnumerable<ContentDetailed>>> GetBook([FromBody] UserId userContent)
+        [HttpPost("GetContent")]
+        public async Task<ActionResult<IEnumerable<ContentDetailed>>> GetContent([FromBody] ContentRequest contentRequest)
         {
-            /* try
-             {
+            
                  var entry = await _db.ContentEntries
-                      .Include(o => o.UserContent)
-                      .Where(o => o.Category == "Book" && o.UserContent != null)
+                      .Include(o => o.UserBookmark)
+                      .Include(o => o.UserRating)
+                      .Where(o => o.Category == contentRequest.Category && o.Association == contentRequest.Association)
                       .Select(p => new ContentDetailed
                       {
                           ContentId = p.Id,
@@ -35,25 +36,10 @@ namespace Know_Your_Nation_Speedy.Controllers
                           FileLocation = p.FileLocation,
                           Description = p.Description,
                           ImageLocation = p.ImageLocation,
-                          Rating = p.UserContent.FirstOrDefault().Rating,
-                          Bookmark = p.UserContent.FirstOrDefault().Bookmark,
-                          Allocated = p.UserContent.FirstOrDefault().Allocated,
-                          ReadStatus = p.UserContent.FirstOrDefault().ReadStatus
-
-                          //UserInfo= p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault()
+                          Rating = p.UserRating.Where(o => o.UserId == contentRequest.UserId).FirstOrDefault().Rating,
+                          Bookmark = p.UserBookmark.Where(o => o.UserId == contentRequest.UserId).FirstOrDefault().Bookmark
                       })
-                     .ToListAsync();
-
-                 var testdata = (from i in _db.ContentEntries
-                                 join u in _db.UserContentEntries on i.Id equals u.ContentId into joiT
-                                 from p in joiT.DefaultIfEmpty()
-                                 where i.Category=="Book" && p.UserId == userContent.Id
-                                 select new {
-                                     i.Name,
-                                     i.FileLocation,
-                                     bookmark = p != null? p.Bookmark : false,
-                                     rating = p != null ? p.Rating :0
-                                 }).ToList();
+                     .ToListAsync();        
                  if (entry != null)
                  {
                      return Ok(entry);
@@ -63,13 +49,6 @@ namespace Know_Your_Nation_Speedy.Controllers
                      return NotFound(new { error = "Books are empty" });
                  }
              }
-             catch(System.Exception ex)
-             {
-                 return NotFound(new { error = ex.Message });
-
-             }*/
-            return null; 
-        }
 
         [HttpPost("CreateContent")]
         public async Task<IActionResult> CreateContent([FromBody] Content content)
