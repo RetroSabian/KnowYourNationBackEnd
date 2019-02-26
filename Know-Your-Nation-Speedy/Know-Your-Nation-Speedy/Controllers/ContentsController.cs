@@ -24,32 +24,31 @@ namespace Know_Your_Nation_Speedy.Controllers
         [HttpPost("GetContent")]
         public async Task<ActionResult<IEnumerable<ContentDetailed>>> GetContent([FromBody] ContentRequest contentRequest)
         {
-            
-                 var entry = await _db.ContentEntries
-                      .Include(o => o.UserBookmark)
-                      .Include(o => o.UserRating)
-                      .Where(o => o.Category == contentRequest.Category && o.Association == contentRequest.Association)
-                      .Select(p => new ContentDetailed
-                      {
-                          ContentId = p.Id,
-                          Name = p.Name,
-                          FileLocation = p.FileLocation,
-                          Description = p.Description,
-                          ImageLocation = p.ImageLocation,
-                          Category = p.Category,
-                          Association = p.Association,
-                          //Rating = p.UserRating != null ? p.UserRating.Where(o => o.UserId == contentRequest.UserId).FirstOrDefault().Rating : 0,
-                          //Bookmark = p.UserBookmark != null ?  p.UserBookmark.Where(o => o.UserId == contentRequest.UserId).FirstOrDefault().Bookmark : false
+                var entry = await _db.ContentEntries
+                     .Include(o => o.UserBookmark)
+                     .Include(o => o.UserRating)
+                     .Where(o => o.Category == contentRequest.Category && o.Association == contentRequest.Association)
+                     .Select(p => new ContentDetailed
+                     {
+                         ContentId = p.Id,
+                         Name = p.Name,
+                         FileLocation = p.FileLocation,
+                         Description = p.Description,
+                         ImageLocation = p.ImageLocation,
+                         Category = p.Category,
+                         Association = p.Association,
+                         Rating = p.UserRating.Where(o => o.UserId == contentRequest.UserId).Any() ? p.UserRating.Where(o => o.UserId == contentRequest.UserId).FirstOrDefault().Rating : 0,
+                         Bookmark = p.UserBookmark.Where(o => o.UserId == contentRequest.UserId).Any() ? p.UserBookmark.Where(o => o.UserId == contentRequest.UserId).FirstOrDefault().Bookmark : false
                       })
-                     .ToListAsync();        
-                 if (entry != null)
-                 {
-                     return Ok(entry);
-                 }
-                 else
-                 {
-                     return NotFound(new { error = "Content is empty" });
-                 }
+                    .ToListAsync();
+                if (entry != null)
+                {
+                    return Ok(entry);
+                }
+                else
+                {
+                    return NotFound(new { error = "Content is empty" });
+                }
              }
 
         [HttpPost("CreateContent")]
