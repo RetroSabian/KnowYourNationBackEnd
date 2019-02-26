@@ -36,8 +36,10 @@ namespace Know_Your_Nation_Speedy.Controllers
                           FileLocation = p.FileLocation,
                           Description = p.Description,
                           ImageLocation = p.ImageLocation,
-                          Rating = p.UserRating.Where(o => o.UserId == contentRequest.UserId).FirstOrDefault().Rating,
-                          Bookmark = p.UserBookmark.Where(o => o.UserId == contentRequest.UserId).FirstOrDefault().Bookmark
+                          Category = p.Category,
+                          Association = p.Association,
+                          //Rating = p.UserRating != null ? p.UserRating.Where(o => o.UserId == contentRequest.UserId).FirstOrDefault().Rating : 0,
+                          //Bookmark = p.UserBookmark != null ?  p.UserBookmark.Where(o => o.UserId == contentRequest.UserId).FirstOrDefault().Bookmark : false
                       })
                      .ToListAsync();        
                  if (entry != null)
@@ -46,7 +48,7 @@ namespace Know_Your_Nation_Speedy.Controllers
                  }
                  else
                  {
-                     return NotFound(new { error = "Books are empty" });
+                     return NotFound(new { error = "Content is empty" });
                  }
              }
 
