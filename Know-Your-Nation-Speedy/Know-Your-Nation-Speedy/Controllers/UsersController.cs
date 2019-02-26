@@ -71,7 +71,7 @@ namespace Know_Your_Nation_Speedy.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody] User User)
         {
-            User.MembershipId = 11;
+            User.MembershipId = 1;
             PasswordBasedKeyDerivationFunction obj = new PasswordBasedKeyDerivationFunction();
             var hasNumber = new Regex(@"[0-9]+");
             var hasUpperChar = new Regex(@"[A-Z]+");
