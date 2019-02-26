@@ -23,17 +23,19 @@ namespace Know_Your_Nation_Speedy.Models
         public DateTime MembershipExpiration { get; set; }
         public Membership Membership { get; set; }
 
-        public ICollection<UserContent> UserContent { get; set; }
+        public ICollection<UserRating> UserRating { get; set; }
         public ICollection<Donation> Donations { get; set; }
         public ICollection<Order> Orders { get; set; }
         public ICollection<UserEvent> UserEvents { get; set; }
+        public ICollection<UserBookmark> UserBookmark { get; set; }
 
         public void Initialise()
         {
-            UserContent= new HashSet<UserContent>();
+            UserRating= new HashSet<UserRating>();
             Donations = new HashSet<Donation>();
             Orders = new HashSet<Order>();
             UserEvents = new HashSet<UserEvent>();
+            UserBookmark = new HashSet<UserBookmark>();
         }
     }
 }

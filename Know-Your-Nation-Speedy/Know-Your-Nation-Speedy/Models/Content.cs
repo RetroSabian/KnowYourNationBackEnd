@@ -19,11 +19,13 @@ namespace Know_Your_Nation_Speedy.Models
         public string Description { get; set; }
         public string Category { get; set; }
         public string Association { get; set; }
-        public ICollection<UserContent> UserContent { get; set; }
+        public ICollection<UserRating> UserRating { get; set; }
+        public ICollection<UserBookmark> UserBookmark { get; set; }
 
         public void Initialise()
         {
-            UserContent = new HashSet<UserContent>();
+            UserRating = new HashSet<UserRating>();
+            UserBookmark = new HashSet<UserBookmark>();
         }
     }
 }

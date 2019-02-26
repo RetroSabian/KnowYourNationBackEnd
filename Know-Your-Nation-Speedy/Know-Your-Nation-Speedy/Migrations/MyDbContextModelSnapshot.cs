@@ -263,7 +263,7 @@ namespace Know_Your_Nation_Speedy.Migrations
 
                     b.Property<DateTime>("MembershipExpiration");
 
-                    b.Property<int?>("MembershipId");
+                    b.Property<int>("MembershipId");
 
                     b.Property<string>("Name");
 
@@ -282,21 +282,15 @@ namespace Know_Your_Nation_Speedy.Migrations
                     b.ToTable("UserEntries");
                 });
 
-            modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserContent", b =>
+            modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserBookmark", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Allocated");
-
                     b.Property<bool>("Bookmark");
 
                     b.Property<int>("ContentId");
-
-                    b.Property<int?>("Rating");
-
-                    b.Property<bool>("ReadStatus");
 
                     b.Property<int>("UserId");
 
@@ -306,7 +300,7 @@ namespace Know_Your_Nation_Speedy.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserContentEntries");
+                    b.ToTable("UserBookmarkEntries");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserEvent", b =>
@@ -326,6 +320,27 @@ namespace Know_Your_Nation_Speedy.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserEventEntries");
+                });
+
+            modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserRating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ContentId");
+
+                    b.Property<int?>("Rating");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRatingEntries");
                 });
 
             modelBuilder.Entity("Know_Your_Nation_Speedy.Models.Donation", b =>
@@ -382,18 +397,19 @@ namespace Know_Your_Nation_Speedy.Migrations
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Membership", "Membership")
                         .WithMany("Users")
-                        .HasForeignKey("MembershipId");
+                        .HasForeignKey("MembershipId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserContent", b =>
+            modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserBookmark", b =>
                 {
                     b.HasOne("Know_Your_Nation_Speedy.Models.Content", "Content")
-                        .WithMany("UserContent")
+                        .WithMany("UserBookmark")
                         .HasForeignKey("ContentId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
-                        .WithMany("UserContent")
+                        .WithMany("UserBookmark")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -407,6 +423,19 @@ namespace Know_Your_Nation_Speedy.Migrations
 
                     b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
                         .WithMany("UserEvents")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Know_Your_Nation_Speedy.Models.UserRating", b =>
+                {
+                    b.HasOne("Know_Your_Nation_Speedy.Models.Content", "Content")
+                        .WithMany("UserRating")
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Know_Your_Nation_Speedy.Models.User", "User")
+                        .WithMany("UserRating")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

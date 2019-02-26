@@ -14,7 +14,8 @@ namespace Know_Your_Nation_Speedy.Models
         { }
 
         public DbSet<Content> ContentEntries { get; set; }
-        public DbSet<UserContent> UserContentEntries { get; set; }
+        public DbSet<UserRating> UserRatingEntries { get; set; }
+        public DbSet<UserBookmark> UserBookmarkEntries { get; set; }
         public DbSet<User> UserEntries { get; set; }
         public DbSet<Donation> DonationEntries { get; set; }
         public DbSet<Event> EventEntries { get; set; }
@@ -29,14 +30,24 @@ namespace Know_Your_Nation_Speedy.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserContent>()
+            modelBuilder.Entity<UserRating>()
                 .HasOne(c => c.Content)
-                .WithMany(a => a.UserContent)
+                .WithMany(a => a.UserRating)
                 .HasForeignKey(aw => aw.ContentId);
-            modelBuilder.Entity<UserContent>()
+            modelBuilder.Entity<UserRating>()
                 .HasOne(aw => aw.User)
-                .WithMany(c => c.UserContent)
+                .WithMany(c => c.UserRating)
                 .HasForeignKey(aw => aw.UserId);
+
+            modelBuilder.Entity<UserBookmark>()
+                .HasOne(c => c.Content)
+                .WithMany(a => a.UserBookmark)
+                .HasForeignKey(aw => aw.ContentId);
+            modelBuilder.Entity<UserBookmark>()
+                .HasOne(aw => aw.User)
+                .WithMany(c => c.UserBookmark)
+                .HasForeignKey(aw => aw.UserId);
+
 
             modelBuilder.Entity<ProductOrder>()
                 .HasOne(po => po.Product)

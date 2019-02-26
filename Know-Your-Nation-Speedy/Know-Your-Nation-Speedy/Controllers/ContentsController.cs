@@ -21,28 +21,54 @@ namespace Know_Your_Nation_Speedy.Controllers
         }
 
         [HttpPost("GetBooks")]
-        public async Task<ActionResult<IEnumerable<ContentDetailed>>> GetBook([FromBody] UserContent userContent)
+        public async Task<ActionResult<IEnumerable<ContentDetailed>>> GetBook([FromBody] UserId userContent)
         {
-            var entry = await _db.ContentEntries
-                     .Include(o => o.UserContent)
-                     .Where(o => o.Category == "Book")
-                     .Select(p => new {
-                         p.Id,
-                         p.Name,
-                         p.FileLocation,
-                         p.Description,
-                         p.ImageLocation,
-                         userInfo = p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault()
-                     })
-                    .ToListAsync();
-            if (entry != null)
-            {
-                return Ok(entry);
-            }
-            else
-            {
-                return NotFound(new { error = "Books are empty" });
-            }
+            /* try
+             {
+                 var entry = await _db.ContentEntries
+                      .Include(o => o.UserContent)
+                      .Where(o => o.Category == "Book" && o.UserContent != null)
+                      .Select(p => new ContentDetailed
+                      {
+                          ContentId = p.Id,
+                          Name = p.Name,
+                          FileLocation = p.FileLocation,
+                          Description = p.Description,
+                          ImageLocation = p.ImageLocation,
+                          Rating = p.UserContent.FirstOrDefault().Rating,
+                          Bookmark = p.UserContent.FirstOrDefault().Bookmark,
+                          Allocated = p.UserContent.FirstOrDefault().Allocated,
+                          ReadStatus = p.UserContent.FirstOrDefault().ReadStatus
+
+                          //UserInfo= p.UserContent.Where(i => i.UserId == userContent.UserId && i.ContentId == p.Id).FirstOrDefault()
+                      })
+                     .ToListAsync();
+
+                 var testdata = (from i in _db.ContentEntries
+                                 join u in _db.UserContentEntries on i.Id equals u.ContentId into joiT
+                                 from p in joiT.DefaultIfEmpty()
+                                 where i.Category=="Book" && p.UserId == userContent.Id
+                                 select new {
+                                     i.Name,
+                                     i.FileLocation,
+                                     bookmark = p != null? p.Bookmark : false,
+                                     rating = p != null ? p.Rating :0
+                                 }).ToList();
+                 if (entry != null)
+                 {
+                     return Ok(entry);
+                 }
+                 else
+                 {
+                     return NotFound(new { error = "Books are empty" });
+                 }
+             }
+             catch(System.Exception ex)
+             {
+                 return NotFound(new { error = ex.Message });
+
+             }*/
+            return null; 
         }
 
         [HttpPost("CreateContent")]
