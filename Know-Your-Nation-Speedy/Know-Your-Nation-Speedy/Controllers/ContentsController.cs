@@ -21,6 +21,22 @@ namespace Know_Your_Nation_Speedy.Controllers
             _config = config;
         }
 
+        [HttpPost("ListContent")]
+        public async Task<ActionResult<IEnumerable<Content>>> ListContent([FromBody] ContentRequest contentRequest)
+        {
+            var entry = await _db.ContentEntries
+                        .Where(o => o.Category == contentRequest.Category && o.Association == contentRequest.Association)
+                       .ToListAsync();
+            if (entry != null)  
+            {
+                return Ok(entry);
+            }
+            else
+            {
+                return NotFound(new { error = "Content is empty" });
+            }
+        }
+
         [HttpPost("GetContent")]
         public async Task<ActionResult<IEnumerable<ContentDetailed>>> GetContent([FromBody] ContentRequest contentRequest)
         {
